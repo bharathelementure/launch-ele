@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "123320592097",
+    "project_id": "launch-ele",
+    "storage_bucket": "launch-ele.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123320592097:android:8913efddcf850ee11279a0",
+        "android_client_info": {
+          "package_name": "com.example.launch_ele"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123320592097-68vt06p51gc76of922l2gub60biu264a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.launch_ele",
+            "certificate_hash": "561b01599c3cc8bd8e095f3f3b97f8b537710694"
+          }
+        },
+        {
+          "client_id": "123320592097-cfi8o04884f84as9n7k9tuonnej12gj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgSHWwgA7SA72Kpktm4agMLAMoeNwt2vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123320592097-cfi8o04884f84as9n7k9tuonnej12gj2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
