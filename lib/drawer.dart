@@ -28,7 +28,6 @@ class NavDrawer extends StatelessWidget {
               ),
               Text(
                 user.email!,
-                // 'bharath1996@gmail.com',
                 style: GoogleFonts.barlow(
                     textStyle: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w400)),

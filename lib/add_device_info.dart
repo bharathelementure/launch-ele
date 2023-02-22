@@ -1,19 +1,13 @@
-// import 'dart:io';
+import 'dart:io';
 
-// import 'package:camera/camera.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:launch_ele/device_with_info.dart';
 import 'package:launch_ele/drawer.dart';
 
-const List<String> homeShaft = [
-  'Kitchen Shaft',
-  'Utility Shaft',
-  'WashRoom Shaft',
-];
-
 class AddDeviceInfo extends StatefulWidget {
-  // final CameraDescription camera;
   const AddDeviceInfo({super.key});
 
   @override
@@ -21,22 +15,14 @@ class AddDeviceInfo extends StatefulWidget {
 }
 
 class _AddDeviceInfoState extends State<AddDeviceInfo> {
-  String dropShaft = homeShaft.first;
-  // late CameraController _camController;
+  final List<String> homeShaftItems = [
+    'Kitchen Shaft',
+    'Utility Shaft',
+    'WashRoom Shaft'
+  ];
 
-  /*late Future<void> _initializeControllerFuture;
-  @override
-  void initState() {
-    super.initState();
-    _camController = CameraController(widget.camera, ResolutionPreset.medium);
-    _initializeControllerFuture = _camController.initialize();
-  }
-
-  @override
-  void dispose() {
-    _camController.dispose();
-    super.dispose();
-  }*/
+  String? selectedValue;
+  String selectedImagePath = "";
 
   @override
   Widget build(BuildContext context) {
@@ -44,32 +30,6 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
       appBar: AppBar(centerTitle: false, actions: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          /*Text('Launch.',
-              style: GoogleFonts.caveat(
-                textStyle:
-                    const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 25,
-              ),
-              Text(
-                'by Elementure',
-                style: GoogleFonts.barlow(
-                    textStyle: const TextStyle(
-                        fontSize: 12, fontWeight: FontWeight.bold)),
-              ),
-              const Text(
-                '.',
-                style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),*/
         ]),
       ]),
       drawer: const NavDrawer(),
@@ -87,7 +47,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                     textStyle: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold)),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -105,7 +65,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -123,51 +83,37 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
-              const Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black, width: 1)),
-                child: SizedBox(
-                  width: 150,
-                  height: 150,
-                  child: Center(
-                    child: /*FutureBuilder<void>(
-                      future: _initializeControllerFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return CameraPreview(_camController);
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    ),*/
-                    Icon(
-                      Icons.linked_camera_rounded,
-                      size: 50,
-                      color: Colors.black,
-                    ),
-                  ),
+              const SizedBox(height: 10),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    selectedImagePath == ''
+                        ? const Icon(
+                            Icons.image_sharp,
+                            size: 150,
+                            color: Colors.black,
+                          )
+                        : Image.file(
+                            File(selectedImagePath),
+                            height: 250,
+                            width: 250,
+                            fit: BoxFit.fill,
+                          ),
+                    IconButton(
+                        onPressed: () async {
+                          selectImage();
+                          setState(() {});
+                        },
+                        icon: const Icon(
+                          Icons.linked_camera_rounded,
+                          size: 50,
+                          color: Colors.black,
+                        ))
+                  ],
                 ),
-              ),/*
-              SizedBox(),
-              IconButton(
-                  onPressed: () async {
-                    try {
-                      await _initializeControllerFuture;
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  DisplayPicturScreen(imagePath: path)));
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
-                  icon: Icon(Icons.linked_camera_rounded)),*/
-              const SizedBox(height: 30),
+              ),
+              const SizedBox(height: 10),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -176,7 +122,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                       padding: const EdgeInsets.only(left: 58, right: 58),
                       child: SizedBox(
                         width: 180,
-                        height: 100,
+                        height: 75,
                         child: Text(
                           'Take a snap of the Installed Device as QR Code Visible.',
                           style: GoogleFonts.barlow(
@@ -192,7 +138,54 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                   ],
                 ),
               ),
-              Center(
+              const SizedBox(height: 10),
+              DropdownButtonFormField2(
+                decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                isExpanded: true,
+                hint: const Text(
+                  'Select Shafts',
+                  style: TextStyle(fontSize: 14),
+                ),
+                icon: const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black45,
+                ),
+                iconSize: 30,
+                buttonHeight: 60,
+                buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                dropdownDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                items: homeShaftItems
+                    .map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(
+                            item,
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ))
+                    .toList(),
+                validator: (value) {
+                  if (value == null) {
+                    return 'Please select shaft.';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                },
+                onSaved: (value) {
+                  selectedValue = value.toString();
+                },
+              ),
+              /*Center(
                 child: Card(
                   shape: const RoundedRectangleBorder(
                       side: BorderSide(color: Colors.black, width: 2)),
@@ -226,8 +219,8 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 20),
+              ),*/
+              const SizedBox(height: 10),
               Center(
                 child: SizedBox(
                     height: 50,
@@ -256,17 +249,79 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
       )),
     );
   }
-}
-/*
-class DisplayPicturScreen extends StatelessWidget {
-  final String imagePath;
-  const DisplayPicturScreen({super.key,required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Display the snap'),),
-      body: Image.file(File(imagePath)),
-    );
+  Future selectImage() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: SizedBox(
+              height: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    const Text('Select Image From !'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            selectedImagePath = await selectImageFromCamera();
+                            print('Image_path:-');
+                            if (selectedImagePath != '') {
+                              Navigator.pop(context);
+                              setState(() {});
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('No Image Saelected !')));
+                            }
+                          },
+                          child: Card(
+                            elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                children: const [
+                                  Icon(
+                                    Icons.linked_camera_outlined,
+                                    size: 50,
+                                  ),
+                                  Text('Camera')
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
-}*/
+
+  selectImageFromGallery() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return '';
+    }
+  }
+
+  selectImageFromCamera() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return '';
+    }
+  }
+}

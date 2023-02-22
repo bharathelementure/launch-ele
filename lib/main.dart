@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:launch_ele/dash_board.dart';
 import 'package:launch_ele/signin_screen.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 Future<void> backgroundHandler(RemoteMessage message) async {}
 
@@ -21,33 +22,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      // initialRoute: '/SignInScreen',
-      debugShowCheckedModeBanner: false,
-      home: const AuthPage(),
-      theme: ThemeData(useMaterial3: true),
-      /*routes: {
-        '/SignInScreen': (context) => const SignInScreen(),
-        'mainPage':(context) => const  MainPage(),
-        '/ForgotPassword': (context) => const ForgotPassword(),
-        '/RecoverCredentials': (context) => const RecoverCredentials(),
-        '/DashBoard': (context) => const DashBoard(),
-        '/SelectionOfDevice': (context) => const SelectionOfDevice(),
-        '/CustomerType': (context) => const CustomerType(),
-        '/NewCustomerOTP': (context) => const NewCustomerOTP(),
-        '/OTPValid': (context) => const OTPValid(),
-        '/AddingNodes': (context) => const AddingNodes(),
-        '/ScanDeviceOrNode': (context) => const ScanDeviceorNode(),
-        '/AddDeviceInfo': (context) => const AddDeviceInfo(),
-        '/DeviceWithInfo': (context) => const DeviceWithInfo(),
-        '/AddDevice': (context) => const AddDevice(),
-        '/ReplaceDevice': (context) => const ReplaceDevice(),
-        '/SearchDevice': (context) => const SearchDevice(),
-        '/ReplacemntApproved': (context) => const ReplacementApproved(),
-        '/ReplaceDeviceorNode': (context) => const ReplaceDeviceorNode(),
-        '/WaitForApproval': (context) => const WaitForApproval(),
-      },*/
+    return OverlaySupport.global(
+      child: MaterialApp(
+        navigatorKey: navigatorKey,
+        // initialRoute: '/SignInScreen',
+        debugShowCheckedModeBanner: false,
+        home: const AuthPage(),
+        theme: ThemeData(useMaterial3: true),
+      ),
     );
   }
 }

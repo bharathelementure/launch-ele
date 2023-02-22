@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:launch_ele/drawer.dart';
 import 'package:launch_ele/wait_forapproval.dart';
 
-enum SingingCharacter { physicaDamage, batteryDamage, powerIssue, networkIssue }
+enum SingingCharacter { physicalDamage, batteryDamage, powerIssue, networkIssue }
 
 class ReplaceDevice extends StatefulWidget {
   const ReplaceDevice({super.key});
@@ -13,14 +16,15 @@ class ReplaceDevice extends StatefulWidget {
 }
 
 class _ReplaceDeviceState extends State<ReplaceDevice> {
-  SingingCharacter? _character = SingingCharacter.physicaDamage;
+  SingingCharacter? _character = SingingCharacter.physicalDamage;
+  String selectedImagePath = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(centerTitle: false, actions: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-         Image.asset('assets/images/11111-hdpi.png',scale: 2),
+          Image.asset('assets/images/11111-hdpi.png', scale: 2),
         ]),
       ]),
       drawer: const NavDrawer(),
@@ -34,7 +38,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
               ListTile(
                 title: const Text('Physical Damage'),
                 leading: Radio<SingingCharacter>(
-                    value: SingingCharacter.physicaDamage,
+                    value: SingingCharacter.physicalDamage,
                     groupValue: _character,
                     onChanged: (SingingCharacter? value) {
                       setState(() {
@@ -75,24 +79,37 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                       });
                     }),
               ),
-              const SizedBox(height: 30),
-              const Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black, width: 1)),
-                child: SizedBox(
-                  width: 150,
-                  height: 150,
-                  child: Center(
-                    child: Icon(
-                      Icons.linked_camera_rounded,
-                      size: 50,
-                      color: Colors.black,
-                    ),
-                  ),
+              const SizedBox(height: 20),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    selectedImagePath == ''
+                        ?  const Icon(
+                            Icons.image_sharp,
+                            size: 150,
+                            color: Colors.black,
+                          )
+                        : Image.file(
+                            File(selectedImagePath),
+                            height: 250,
+                            width: 250,
+                            fit: BoxFit.fill,
+                          ),
+                    IconButton(
+                        onPressed: () async {
+                          selectImage();
+                          setState(() {});
+                        },
+                        icon: const Icon(
+                          Icons.linked_camera_rounded,
+                          size: 50,
+                          color: Colors.black,
+                        ))
+                  ],
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -149,11 +166,11 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                                     content: const Text(
                                         'Kindley Reach us on +919008900855 for Immediate Replacement'),
                                   ));
-                                   Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const WaitForApproval()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const WaitForApproval()));
                           // Navigator.pushNamed(context, '/WaitForApproval');
                         },
                         child: Text(
@@ -169,4 +186,107 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
       )),
     );
   }
+
+  Future selectImage() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: SizedBox(
+              height: 200,
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    const Text('Select Image From !'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        /*GestureDetector(
+                          onTap: () async {
+                            selectedImagePath = await selectImageFromGallery();
+                            print('Image_path:-');
+                            if (selectedImagePath != '') {
+                              Navigator.pop(context);
+                              setState(() {});
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('No Image Selected !')));
+                            }
+                          },
+                          child: Card(
+                            elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                children: const [
+                                  Icon(Icons.linked_camera_rounded, size: 50),
+                                  Text('Gallery')
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),*/
+                        GestureDetector(
+                          onTap: () async {
+                            selectedImagePath = await selectImageFromCamera();
+                            print('Image_path:-');
+                            if (selectedImagePath != '') {
+                              Navigator.pop(context);
+                              setState(() {});
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('No Image Saelected !')));
+                            }
+                          },
+                          child: Card(
+                            elevation: 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                children: const [
+                                  Icon(
+                                    Icons.linked_camera_outlined,
+                                    size: 50,
+                                  ),
+                                  Text('Camera')
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  selectImageFromGallery() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return '';
+    }
+  }
+
+  selectImageFromCamera() async {
+    XFile? file = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 10);
+    if (file != null) {
+      return file.path;
+    } else {
+      return '';
+    }
+  }
 }
+

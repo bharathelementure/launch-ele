@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:launch_ele/forgot_password.dart';
 import 'package:launch_ele/main.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -14,6 +16,7 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
+  bool _hasInternet = false;
 
   @override
   void dispose() {
@@ -26,6 +29,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.brown.shade100,
       body: SingleChildScrollView(
         child: SafeArea(
             child: Padding(
@@ -107,11 +111,11 @@ class _SignInScreenState extends State<SignInScreen> {
                 children: [
                   TextButton(
                       onPressed: () {
-                         Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const ForgotPassword()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const ForgotPassword()));
                         // Navigator.pushNamed(context, '/ForgotPassword');
                       },
                       child: Text(
@@ -131,8 +135,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueGrey),
-                        onPressed: () {
-                          showDialog(
+                        onPressed: () async {
+                          /*showDialog(
                               context: context,
                               builder: (BuildContext context) => AlertDialog(
                                     backgroundColor: Colors.grey.shade200,
@@ -154,8 +158,25 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ),
                                     content: const Text(
                                         'If you don\'t have access, kindly connect to vendor for the Acccess.'),
-                                  ));
+                                  ));*/
                           signIn();
+                          _hasInternet =
+                              await InternetConnectionChecker().hasConnection;
+                          final color =
+                              _hasInternet ? Colors.green : Colors.red;
+                          final text =
+                              _hasInternet ? 'Internet' : 'No Internet';
+
+                          showSimpleNotification(Text(text,
+                              style: GoogleFonts.barlow(
+                                textStyle: const TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              )),background: color);
+                          /*Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        const DashBoard()));*/
                           // Navigator.pushNamed(context, '/DashBoard');
                         },
                         child: Text(

@@ -43,32 +43,6 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
       appBar: AppBar(centerTitle: false, actions: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Image.asset('assets/images/11111-hdpi.png',scale: 2),
-          /*Text('Launch.',
-              style: GoogleFonts.caveat(
-                textStyle:
-                    const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 25,
-              ),
-              Text(
-                'by Elementure',
-                style: GoogleFonts.barlow(
-                    textStyle: const TextStyle(
-                        fontSize: 12, fontWeight: FontWeight.bold)),
-              ),
-              const Text(
-                '.',
-                style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),*/
         ]),
       ]),
       drawer: const NavDrawer(),

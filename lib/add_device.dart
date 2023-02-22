@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/drawer.dart';
@@ -80,7 +81,105 @@ class _AddDeviceState extends State<AddDevice> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  Center(
+                   DropdownButtonFormField2(
+                value: _selectionItem1,
+                decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                isExpanded: true,
+                hint: const Text(
+                  'Select Automations',
+                  style: TextStyle(fontSize: 14),
+                ),
+                icon:const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black45,
+                ),
+                iconSize: 30,
+                buttonHeight: 60,
+                buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                dropdownDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                items: _dropdownValue.keys
+                    .map<DropdownMenuItem<String>>(
+                        (String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                              ),
+                            ))
+                    .toList(),
+                validator: (value) {
+                  if (value == null) {
+                    return 'Please select Automations';
+                  }
+                },
+                onChanged: (value) {
+                  setState(() {
+                    _selectionItem1 = value;
+                    _selectionItem2 = null;
+                  });
+                },
+                onSaved: (value) {
+                  _selectionItem1 = value.toString();
+                },
+              ),
+              const SizedBox(height: 30),
+               DropdownButtonFormField2(
+                value: _selectionItem2,
+                decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.zero,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                isExpanded: true,
+                hint: const Text(
+                  'Select Automations',
+                  style: TextStyle(fontSize: 14),
+                ),
+                icon: const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black45,
+                ),
+                iconSize: 30,
+                buttonHeight: 60,
+                buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                dropdownDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                items: _selectionItem1 == null
+                          ? null
+                          : _dropdownValue[_selectionItem1]!
+                    .map<DropdownMenuItem<String>>(
+                        (String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                              ),
+                            ))
+                    .toList(),
+                validator: (value) {
+                  if (value == null) {
+                    return 'Please select Automations';
+                  }
+                },
+                onChanged: (value) {
+                  setState(() {
+                   _selectionItem2 = value!;
+                  });
+                },
+                onSaved: (value) {
+                  _selectionItem2 = value.toString();
+                },
+              ),
+                  /*Center(
                     child: Card(
                       shape: const RoundedRectangleBorder(
                           side: BorderSide(color: Colors.black, width: 2)),
@@ -148,7 +247,7 @@ class _AddDeviceState extends State<AddDevice> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                   const SizedBox(height: 50),
                   Center(
                     child: IconButton(
