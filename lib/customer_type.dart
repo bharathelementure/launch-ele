@@ -92,7 +92,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           )),
                       Text(
                         'New Customer',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold)),
                       )
@@ -129,7 +129,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           )),
                       Text(
                         'Existing Customer',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold)),
                       )
@@ -150,7 +150,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           border: const OutlineInputBorder(),
                           label: Text(
                             'Name',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
@@ -163,7 +163,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           border: const OutlineInputBorder(),
                           label: Text(
                             'Mobile',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
@@ -176,7 +176,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           border: const OutlineInputBorder(),
                           label: Text(
                             'Email',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
@@ -220,6 +220,7 @@ class _CustomerTypeState extends State<CustomerType> {
                         if (value == null) {
                           return 'Please select property';
                         }
+                        return null;
                       },
                       onChanged: (value) {},
                       onSaved: (value) {
@@ -271,7 +272,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           border: const OutlineInputBorder(),
                           label: Text(
                             'Unit No.',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
@@ -284,7 +285,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           border: const OutlineInputBorder(),
                           label: Text(
                             'Address',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
@@ -296,7 +297,7 @@ class _CustomerTypeState extends State<CustomerType> {
                           border: const OutlineInputBorder(),
                           label: Text(
                             'PIN Code',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
@@ -321,7 +322,7 @@ class _CustomerTypeState extends State<CustomerType> {
                                   ),
                                   title: Text(
                                     'Customer Already Exists!',
-                                    style: GoogleFonts.barlow(
+                                    style: GoogleFonts.notoSans(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -337,7 +338,7 @@ class _CustomerTypeState extends State<CustomerType> {
                       },
                       child: Text(
                         'NEXT',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 16, color: Colors.white)),
                       ),

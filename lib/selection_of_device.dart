@@ -31,10 +31,10 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown.shade100,
+      // backgroundColor: Colors.brown.shade100,
       appBar: AppBar(
           centerTitle: false,
-          backgroundColor: Colors.lightGreen.shade100,
+          // backgroundColor: Colors.lightGreen.shade100,
           actions: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Image.asset(
@@ -128,6 +128,8 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
               DropdownButtonFormField2(
                 value: _selectionItem1,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xffE7E0EC),
                   isDense: true,
                   contentPadding: EdgeInsets.zero,
                   border: OutlineInputBorder(
@@ -139,9 +141,7 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
                   'Select Automations',
                   style: TextStyle(fontSize: 14),
                 ),
-                icon:const Icon(
-                  Icons.arrow_drop_down
-                ),
+                icon: const Icon(Icons.arrow_drop_down),
                 iconSize: 30,
                 buttonHeight: 60,
                 buttonPadding: const EdgeInsets.only(left: 20, right: 10),
@@ -161,21 +161,27 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
                   if (value == null) {
                     return 'Please select Automations';
                   }
+                  return null;
                 },
                 onChanged: (value) {
                   setState(() {
+                    print(_dropdownValue);
+                    print(_selectionItem1);
                     _selectionItem1 = value;
                     _selectionItem2 = null;
                   });
                 },
                 onSaved: (value) {
                   _selectionItem1 = value.toString();
+                  print(_selectionItem1);
                 },
               ),
               const SizedBox(height: 30),
-               DropdownButtonFormField2(
+              DropdownButtonFormField2(
                 value: _selectionItem2,
                 decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xffE7E0EC),
                   isDense: true,
                   contentPadding: EdgeInsets.zero,
                   border: OutlineInputBorder(
@@ -198,24 +204,26 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 items: _selectionItem1 == null
-                          ? null
-                          : _dropdownValue[_selectionItem1]!
-                    .map<DropdownMenuItem<String>>(
-                        (String value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                              ),
-                            ))
-                    .toList(),
+                    ? null
+                    : _dropdownValue[_selectionItem1]!
+                        .map<DropdownMenuItem<String>>(
+                            (String value) => DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                  ),
+                                ))
+                        .toList(),
                 validator: (value) {
                   if (value == null) {
                     return 'Please select Automations';
                   }
+                  return null;
                 },
                 onChanged: (value) {
                   setState(() {
-                   _selectionItem2 = value!;
+                    _selectionItem2 = value!;
+                    print(_selectionItem2);
                   });
                 },
                 onSaved: (value) {

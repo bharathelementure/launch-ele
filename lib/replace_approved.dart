@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/add_device.dart';
@@ -14,6 +15,7 @@ class ReplacementApproved extends StatefulWidget {
 }
 
 class _ReplacementApprovedState extends State<ReplacementApproved> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +48,7 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                             children: [
                               Text(
                                 'Srinivas Rao M',
-                                style: GoogleFonts.barlow(
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600)),
@@ -56,12 +58,12 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                                 children: [
                                   Text(
                                     'Customer ID:',
-                                    style: GoogleFonts.barlow(
+                                    style: GoogleFonts.notoSans(
                                         textStyle: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500)),
                                   ),
-                                  const Text('45a678b-njn8843-29843bna83')
+                                  const Text('93450-ty89Y0-Yusd89')
                                 ],
                               )
                             ],
@@ -73,7 +75,7 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                   const SizedBox(height: 20),
                   Text(
                     'Installed Devices or Nodes',
-                    style: GoogleFonts.barlow(
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(fontSize: 16)),
                   ),
                   Center(
@@ -90,40 +92,42 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                             children: [
                               Text(
                                 'Aquesa Measure with Control',
-                                style: GoogleFonts.barlow(
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600)),
                               ),
                               Text(
-                                '95a54hij-oploserti-nm24560dgh',
-                                style: GoogleFonts.barlow(
+                                user.uid,
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w300)),
                               ),
                               const SizedBox(height: 8),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
-                                    width: 160,
+                                    width: 180,
                                     height: 30,
                                     child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blueGrey),
                                         onPressed: () {
-                                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ReplaceDevice()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ReplaceDevice()));
                                           // Navigator.pushNamed(
-                                              // context, '/ReplaceDevice');
+                                          // context, '/ReplaceDevice');
                                         },
                                         child: Text(
                                           'CHANGE REQUEST',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -136,17 +140,18 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blueGrey),
                                         onPressed: () {
-                                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ScanDeviceorNode()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ScanDeviceorNode()));
                                           // Navigator.pushNamed(
-                                              // context, '/ScanDeviceOrNode');
+                                          // context, '/ScanDeviceOrNode');
                                         },
                                         child: Text(
                                           'UPDATE',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -174,21 +179,22 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                             children: [
                               Text(
                                 'Aquesa Measure with Control',
-                                style: GoogleFonts.barlow(
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600)),
                               ),
                               Text(
-                                '95a54hij-oploserti-nm24560dgh',
-                                style: GoogleFonts.barlow(
+                                user.uid,
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w300)),
                               ),
                               const SizedBox(height: 8),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
                                     width: 160,
@@ -197,17 +203,18 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blueGrey),
                                         onPressed: () {
-                                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ReplaceDeviceorNode()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ReplaceDeviceorNode()));
                                           // Navigator.pushNamed(
-                                              // context, '/ReplaceDeviceorNode');
+                                          // context, '/ReplaceDeviceorNode');
                                         },
                                         child: Text(
                                           'REPLACE',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -220,17 +227,18 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blueGrey),
                                         onPressed: () {
-                                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ScanDeviceorNode()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ScanDeviceorNode()));
                                           // Navigator.pushNamed(
-                                              // context, '/ScanDeviceOrNode');
+                                          // context, '/ScanDeviceOrNode');
                                         },
                                         child: Text(
                                           'UPDATE',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -253,7 +261,7 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blueGrey),
                             onPressed: () {
-                               Navigator.push(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
@@ -262,7 +270,7 @@ class _ReplacementApprovedState extends State<ReplacementApproved> {
                             },
                             child: Text(
                               'ADD DEVICE',
-                              style: GoogleFonts.barlow(
+                              style: GoogleFonts.notoSans(
                                   textStyle: const TextStyle(
                                       fontSize: 16, color: Colors.white)),
                             ))),

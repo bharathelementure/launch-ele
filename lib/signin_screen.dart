@@ -89,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     border: const OutlineInputBorder(),
                     label: Text(
                       'Email',
-                      style: GoogleFonts.barlow(
+                      style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(fontSize: 16)),
                     )),
               ),
@@ -102,7 +102,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     border: const OutlineInputBorder(),
                     label: Text(
                       'Password',
-                      style: GoogleFonts.barlow(
+                      style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(fontSize: 16)),
                     )),
               ),
@@ -120,7 +120,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                       child: Text(
                         'Forgot Password',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 decoration: TextDecoration.underline,
                                 fontSize: 16,
@@ -167,11 +167,13 @@ class _SignInScreenState extends State<SignInScreen> {
                           final text =
                               _hasInternet ? 'Internet' : 'No Internet';
 
-                          showSimpleNotification(Text(text,
-                              style: GoogleFonts.barlow(
-                                textStyle: const TextStyle(
-                                    fontSize: 16, color: Colors.white),
-                              )),background: color);
+                          showSimpleNotification(
+                              Text(text,
+                                  style: GoogleFonts.notoSans(
+                                    textStyle: const TextStyle(
+                                        fontSize: 16, color: Colors.white),
+                                  )),
+                              background: color);
                           /*Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -181,7 +183,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                         child: Text(
                           'SIGN IN',
-                          style: GoogleFonts.barlow(
+                          style: GoogleFonts.notoSans(
                               textStyle: const TextStyle(
                                   fontSize: 16, color: Colors.white)),
                         ))),
@@ -197,7 +199,7 @@ class _SignInScreenState extends State<SignInScreen> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailcontroller.text, password: _passwordcontroller.text);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       showDialog(
           context: context,
           builder: (BuildContext context) => AlertDialog(
@@ -212,7 +214,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 title: Text(
                   'Please check your Credentials!',
-                  style: GoogleFonts.barlow(
+                  style: GoogleFonts.notoSans(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 content: const Text(

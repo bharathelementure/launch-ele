@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,6 +16,7 @@ class AddDeviceInfo extends StatefulWidget {
 }
 
 class _AddDeviceInfoState extends State<AddDeviceInfo> {
+  final user = FirebaseAuth.instance.currentUser!;
   final List<String> homeShaftItems = [
     'Kitchen Shaft',
     'Utility Shaft',
@@ -43,7 +45,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
             children: [
               Text(
                 'DEVICE / NODE INFORMATION',
-                style: GoogleFonts.barlow(
+                style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(
                         fontSize: 18, fontWeight: FontWeight.bold)),
               ),
@@ -53,13 +55,13 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                 children: [
                   Text(
                     'Device Type:',
-                    style: GoogleFonts.barlow(
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500)),
                   ),
                   Text(
                     'Aquesa Measure with Control',
-                    style: GoogleFonts.barlow(
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500)),
                   ),
@@ -71,13 +73,13 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                 children: [
                   Text(
                     'Device ID:',
-                    style: GoogleFonts.barlow(
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500)),
                   ),
                   Text(
-                    '95adgh58-m3j3opl-034klsvfgj',
-                    style: GoogleFonts.barlow(
+                    user.uid,
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500)),
                   ),
@@ -125,7 +127,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                         height: 75,
                         child: Text(
                           'Take a snap of the Installed Device as QR Code Visible.',
-                          style: GoogleFonts.barlow(
+                          style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -148,10 +150,9 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                   ),
                 ),
                 isExpanded: true,
-                hint: const Text(
-                  'Select Shafts',
-                  style: TextStyle(fontSize: 14),
-                ),
+                hint: Text('Select Shafts',
+                    style: GoogleFonts.notoSans(
+                        textStyle: const TextStyle(fontSize: 14))),
                 icon: const Icon(
                   Icons.arrow_drop_down,
                   color: Colors.black45,
@@ -179,8 +180,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                   }
                   return null;
                 },
-                onChanged: (value) {
-                },
+                onChanged: (value) {},
                 onSaved: (value) {
                   selectedValue = value.toString();
                 },
@@ -238,7 +238,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                         },
                         child: Text(
                           'ADD DEVICE',
-                          style: GoogleFonts.barlow(
+                          style: GoogleFonts.notoSans(
                               textStyle: const TextStyle(
                                   fontSize: 16, color: Colors.white)),
                         ))),
@@ -249,6 +249,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
       )),
     );
   }
+
   Future selectImage() {
     return showDialog(
         context: context,
@@ -269,7 +270,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                         GestureDetector(
                           onTap: () async {
                             selectedImagePath = await selectImageFromCamera();
-                            print('Image_path:-');
+                            // print('Image_path:-');
                             if (selectedImagePath != '') {
                               Navigator.pop(context);
                               setState(() {});
@@ -279,12 +280,12 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                                       content: Text('No Image Saelected !')));
                             }
                           },
-                          child: Card(
+                          child: const Card(
                             elevation: 5,
                             child: Padding(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(8),
                               child: Column(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.linked_camera_outlined,
                                     size: 50,

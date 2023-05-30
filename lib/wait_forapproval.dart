@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/drawer.dart';
@@ -13,12 +14,13 @@ class WaitForApproval extends StatefulWidget {
 }
 
 class _WaitForApprovalState extends State<WaitForApproval> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: false, actions: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png',scale: 2),
+            Image.asset('assets/images/11111-hdpi.png', scale: 2),
           ]),
         ]),
         drawer: const NavDrawer(),
@@ -45,7 +47,7 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                             children: [
                               Text(
                                 'Srinivas Rao M',
-                                style: GoogleFonts.barlow(
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600)),
@@ -55,12 +57,12 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                 children: [
                                   Text(
                                     'Customer ID:',
-                                    style: GoogleFonts.barlow(
+                                    style: GoogleFonts.notoSans(
                                         textStyle: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500)),
                                   ),
-                                  const Text('45a678b-njn8843-29843bna83')
+                                  const Text('930io-Y45656-dfgh34')
                                 ],
                               )
                             ],
@@ -72,7 +74,7 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                   const SizedBox(height: 20),
                   Text(
                     'Installed Devices or Nodes',
-                    style: GoogleFonts.barlow(
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(fontSize: 16)),
                   ),
                   Center(
@@ -89,40 +91,42 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                             children: [
                               Text(
                                 'Aquesa Measure with Control',
-                                style: GoogleFonts.barlow(
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600)),
                               ),
                               Text(
-                                '95a54hij-oploserti-nm24560dgh',
-                                style: GoogleFonts.barlow(
+                                user.uid,
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w300)),
                               ),
                               const SizedBox(height: 8),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
-                                    width: 160,
+                                    width: 180,
                                     height: 30,
                                     child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blueGrey),
                                         onPressed: () {
-                                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ReplaceDevice()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ReplaceDevice()));
                                           // Navigator.pushNamed(
-                                              // context, '/ReplaceDevice');
+                                          // context, '/ReplaceDevice');
                                         },
                                         child: Text(
                                           'CHANGE REQUEST',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -135,16 +139,17 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blueGrey),
                                         onPressed: () {
-                                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ScanDeviceorNode()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ScanDeviceorNode()));
                                           // Navigator.pushNamed(context, '/ScanDeviceOrNode');
                                         },
                                         child: Text(
                                           'UPDATE',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -172,32 +177,34 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                             children: [
                               Text(
                                 'Aquesa Measure with Control',
-                                style: GoogleFonts.barlow(
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600)),
                               ),
                               Text(
-                                '95a54hij-oploserti-nm24560dgh',
-                                style: GoogleFonts.barlow(
+                                user.uid,
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w300)),
                               ),
                               const SizedBox(height: 8),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
-                                    width: 160,
+                                    width: 180,
                                     height: 30,
                                     child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor: const Color(0xFF788891)),
+                                            backgroundColor:
+                                                const Color(0xFF788891)),
                                         onPressed: null,
                                         child: Text(
                                           'CHANGE REQUEST',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -210,16 +217,17 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                         style: ElevatedButton.styleFrom(
                                             backgroundColor: Colors.blueGrey),
                                         onPressed: () {
-                                           Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            const ScanDeviceorNode()));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ScanDeviceorNode()));
                                           //  Navigator.pushNamed(context, '/ScanDeviceOrNode');
                                         },
                                         child: Text(
                                           'UPDATE',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   color: Colors.white)),
@@ -242,7 +250,7 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.blueGrey),
                             onPressed: () {
-                               Navigator.push(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
@@ -251,7 +259,7 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                             },
                             child: Text(
                               'ADD DEVICE',
-                              style: GoogleFonts.barlow(
+                              style: GoogleFonts.notoSans(
                                   textStyle: const TextStyle(
                                       fontSize: 16, color: Colors.white)),
                             ))),

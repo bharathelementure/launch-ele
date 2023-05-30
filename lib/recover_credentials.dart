@@ -62,7 +62,7 @@ class _RecoverCredentialsState extends State<RecoverCredentials> {
                           const SizedBox(height: 30),
                           Text(
                             'Please check your inbox,we\'ve sent the password link for the registered email',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                               textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w400),
                             ),
@@ -83,7 +83,7 @@ class _RecoverCredentialsState extends State<RecoverCredentials> {
                 },
                 child: Text(
                   'SIGN IN',
-                  style: GoogleFonts.barlow(
+                  style: GoogleFonts.notoSans(
                       textStyle: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

@@ -21,7 +21,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           padding: const EdgeInsets.all(28),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Image.asset('assets/images/11111-hdpi.png'),
+            Image.asset('assets/images/11111-hdpi.png'),
             const SizedBox(height: 10),
             Center(
               child: Column(
@@ -33,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       const Padding(padding: EdgeInsets.all(30)),
                       Text(
                         '!',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 30,
@@ -42,7 +42,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       const SizedBox(width: 5),
                       Text(
                         'FORGOT PASSWORD',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold)),
                       )
@@ -62,7 +62,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       height: 100,
                       child: Text(
                         'No worries, We get you back. Please enter your registered email',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -82,7 +82,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   border: const OutlineInputBorder(),
                   label: Text(
                     'Email',
-                    style: GoogleFonts.barlow(
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(fontSize: 16)),
                   )),
             ),
@@ -91,16 +91,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               children: [
                 TextButton(
                     onPressed: () {
-                       Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const SignInScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const SignInScreen()));
                       // Navigator.pushNamed(context, '/SignInScreen');
                     },
                     child: Text(
                       'SIGN IN',
-                      style: GoogleFonts.barlow(
+                      style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -115,44 +115,45 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueGrey),
-                      onPressed: () {showDialog(
-                              context: context,
-                              builder: (BuildContext context) => AlertDialog(
-                                    backgroundColor: Colors.grey.shade200,
-                                    shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            color: Colors.black, width: 2),
-                                        borderRadius: BorderRadius.circular(15)),
-                                    icon: const Icon(
-                                      Icons.cancel,
-                                      size: 50,
-                                      color: Colors.black,
-                                    ),
-                                    title: Text(
-                                      'User Doesn\'t Exists',
-                                      style: GoogleFonts.barlow(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    content: const Text(
-                                        'If you don\'t have access, kindly connect to vendor for the Access.'),
-                                    /*actions: [
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                                  backgroundColor: Colors.grey.shade200,
+                                  shape: RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                          color: Colors.black, width: 2),
+                                      borderRadius: BorderRadius.circular(15)),
+                                  icon: const Icon(
+                                    Icons.cancel,
+                                    size: 50,
+                                    color: Colors.black,
+                                  ),
+                                  title: Text(
+                                    'User Doesn\'t Exists',
+                                    style: GoogleFonts.notoSans(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  content: const Text(
+                                      'If you don\'t have access, kindly connect to vendor for the Access.'),
+                                  /*actions: [
                                         TextButton(
                                             onPressed: () =>
                                                 Navigator.pop(context, 'OK'),
                                             child: const Text('OK'))
                                       ]*/
-                                  ));
-                                   Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const RecoverCredentials()));
+                                ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const RecoverCredentials()));
                         // Navigator.pushNamed(context, '/RecoverCredentials');
                       },
                       child: Text(
                         'FORGOT PASSWORD',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 16, color: Colors.white)),
                       ))),

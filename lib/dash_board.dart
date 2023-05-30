@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/drawer.dart';
@@ -12,18 +13,20 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-   bool _hasInternet = false;
+  final user = FirebaseAuth.instance.currentUser!;
+  //  bool _hasInternet = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown.shade100,
-      appBar: AppBar(centerTitle: false,
-      backgroundColor: Colors.lightGreen.shade100,
-       actions: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png', scale: 2),
-        ]),
-      ]),
+      // backgroundColor: Colors.brown.shade100,
+      appBar: AppBar(
+          centerTitle: false,
+          // backgroundColor: Colors.lightGreen.shade100,
+          actions: [
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Image.asset('assets/images/11111-hdpi.png', scale: 2),
+            ]),
+          ]),
       drawer: const NavDrawer(),
       body: SafeArea(
           child: Padding(
@@ -38,10 +41,11 @@ class _DashBoardState extends State<DashBoard> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Card(elevation: 10,
+                    Card(
+                        elevation: 10,
                         shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                color: Colors.black, width: 2),
+                            side:
+                                const BorderSide(color: Colors.black, width: 2),
                             borderRadius: BorderRadius.circular(12)),
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
@@ -66,7 +70,7 @@ class _DashBoardState extends State<DashBoard> {
                         )),
                     Text(
                       'Install New',
-                      style: GoogleFonts.barlow(
+                      style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                     )
@@ -75,10 +79,11 @@ class _DashBoardState extends State<DashBoard> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Card(elevation: 10,
+                    Card(
+                        elevation: 10,
                         shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                color: Colors.black, width: 2),
+                            side:
+                                const BorderSide(color: Colors.black, width: 2),
                             borderRadius: BorderRadius.circular(12)),
                         clipBehavior: Clip.hardEdge,
                         child: InkWell(
@@ -102,7 +107,7 @@ class _DashBoardState extends State<DashBoard> {
                         )),
                     Text(
                       'Find Device',
-                      style: GoogleFonts.barlow(
+                      style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
                     )
@@ -111,11 +116,12 @@ class _DashBoardState extends State<DashBoard> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Card(elevation: 10,
+                    Card(
+                        elevation: 10,
                         color: Colors.grey.shade300,
                         shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                                color: Colors.black, width: 2),
+                            side:
+                                const BorderSide(color: Colors.black, width: 2),
                             borderRadius: BorderRadius.circular(12)),
                         clipBehavior: Clip.hardEdge,
                         child: const InkWell(
@@ -133,7 +139,7 @@ class _DashBoardState extends State<DashBoard> {
                         )),
                     Text(
                       'Gateway',
-                      style: GoogleFonts.barlow(
+                      style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -146,13 +152,14 @@ class _DashBoardState extends State<DashBoard> {
             const SizedBox(height: 20),
             Text(
               'Recent Activities',
-              style: GoogleFonts.barlow(
+              style: GoogleFonts.notoSans(
                   textStyle: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w400)),
             ),
             const SizedBox(height: 20),
-            SizedBox(height: 436,
-            // width: double.infinity,
+            SizedBox(
+              height: 436,
+              // width: double.infinity,
               child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1),
@@ -162,8 +169,9 @@ class _DashBoardState extends State<DashBoard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Center(
-                            child: Card(elevation: 15,
-                            color: const Color(0xffE8DEF8),
+                            child: Card(
+                              elevation: 15,
+                              color: const Color(0xffE8DEF8),
                               /*shape: RoundedRectangleBorder(
                                   side: const BorderSide(
                                       color: Colors.black, width: 2),
@@ -183,7 +191,7 @@ class _DashBoardState extends State<DashBoard> {
                                         children: [
                                           Text(
                                             'Device Type:',
-                                            style: GoogleFonts.barlow(
+                                            style: GoogleFonts.notoSans(
                                                 textStyle: const TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -191,7 +199,7 @@ class _DashBoardState extends State<DashBoard> {
                                           ),
                                           Text(
                                             'Aquesa Measure',
-                                            style: GoogleFonts.barlow(
+                                            style: GoogleFonts.notoSans(
                                                 textStyle: const TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:
@@ -202,14 +210,14 @@ class _DashBoardState extends State<DashBoard> {
                                       const SizedBox(height: 5),
                                       Text(
                                         'Customer ID: ',
-                                        style: GoogleFonts.barlow(
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        '63nbbu8994rnja-99823nvsnunjvn90',
-                                        style: GoogleFonts.barlow(
+                                        user.uid,
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400)),
@@ -217,14 +225,14 @@ class _DashBoardState extends State<DashBoard> {
                                       const SizedBox(height: 5),
                                       Text(
                                         'Device ID: ',
-                                        style: GoogleFonts.barlow(
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        '63nbbu8994rnja-99823nvsnunjvn90',
-                                        style: GoogleFonts.barlow(
+                                        user.uid,
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400)),
@@ -237,9 +245,10 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                           const SizedBox(height: 25),
                           Center(
-                            child: Card(elevation: 15,
-                            color: const Color(0xffE8DEF8),
-                            // shadowColor: Color(0x007B6A81),
+                            child: Card(
+                              elevation: 15,
+                              color: const Color(0xffE8DEF8),
+                              // shadowColor: Color(0x007B6A81),
                               /*shape: RoundedRectangleBorder(
                                   side: const BorderSide(
                                       color: Colors.black, width: 2),
@@ -259,7 +268,7 @@ class _DashBoardState extends State<DashBoard> {
                                         children: [
                                           Text(
                                             'Device Type:',
-                                            style: GoogleFonts.barlow(
+                                            style: GoogleFonts.notoSans(
                                                 textStyle: const TextStyle(
                                                     fontSize: 15,
                                                     fontWeight:
@@ -267,7 +276,7 @@ class _DashBoardState extends State<DashBoard> {
                                           ),
                                           Text(
                                             'Aquesa Measure',
-                                            style: GoogleFonts.barlow(
+                                            style: GoogleFonts.notoSans(
                                                 textStyle: const TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:
@@ -278,14 +287,14 @@ class _DashBoardState extends State<DashBoard> {
                                       const SizedBox(height: 5),
                                       Text(
                                         'Customer ID: ',
-                                        style: GoogleFonts.barlow(
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        '63nbbu8994rnja-99823nvsnunjvn90',
-                                        style: GoogleFonts.barlow(
+                                        user.uid,
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400)),
@@ -293,14 +302,14 @@ class _DashBoardState extends State<DashBoard> {
                                       const SizedBox(height: 5),
                                       Text(
                                         'Device ID: ',
-                                        style: GoogleFonts.barlow(
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        '63nbbu8994rnja-99823nvsnunjvn90',
-                                        style: GoogleFonts.barlow(
+                                        user.uid,
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w400)),

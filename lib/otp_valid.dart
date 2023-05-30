@@ -63,7 +63,7 @@ class _OTPValidState extends State<OTPValid> {
           Center(
             child: Text(
               'Customer Successfully Created',
-              style: GoogleFonts.barlow(
+              style: GoogleFonts.notoSans(
                   textStyle: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold)),
             ),
@@ -75,7 +75,7 @@ class _OTPValidState extends State<OTPValid> {
                 height: 80,
                 child: Text(
                   'You can add Devices and Nodes to this Customer.',
-                  style: GoogleFonts.barlow(
+                  style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -101,7 +101,7 @@ class _OTPValidState extends State<OTPValid> {
                         },
                         child: Text(
                           'ADD DEVICE',
-                          style: GoogleFonts.barlow(
+                          style: GoogleFonts.notoSans(
                               textStyle: const TextStyle(
                                   fontSize: 16, color: Colors.white)),
                         ))),

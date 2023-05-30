@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/drawer.dart';
@@ -42,7 +44,7 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
     return Scaffold(
       appBar: AppBar(centerTitle: false, actions: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png',scale: 2),
+          Image.asset('assets/images/11111-hdpi.png', scale: 2),
         ]),
       ]),
       drawer: const NavDrawer(),
@@ -57,7 +59,7 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
               Center(
                 child: Text(
                   'OTP For Installation',
-                  style: GoogleFonts.barlow(
+                  style: GoogleFonts.notoSans(
                       textStyle: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
@@ -103,7 +105,7 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
                       onPressed: () {},
                       child: Text(
                         'Resend OTP',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -132,23 +134,23 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
                                       ),
                                       title: Text(
                                         'Kindly Check OTP Entered',
-                                        style: GoogleFonts.barlow(
+                                        style: GoogleFonts.notoSans(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       content: const Text(
                                           'You can get a new OTP by clicking Resend Button after 30 Seconds'),
                                     ));
-                                     Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const OTPValid()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        const OTPValid()));
                             // Navigator.pushNamed(context, '/OTPValid');
                           },
                           child: Text(
                             'SUBMIT',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 16, color: Colors.white)),
                           )))

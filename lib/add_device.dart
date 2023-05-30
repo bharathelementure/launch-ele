@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/drawer.dart';
@@ -12,6 +13,7 @@ class AddDevice extends StatefulWidget {
 }
 
 class _AddDeviceState extends State<AddDevice> {
+  final user = FirebaseAuth.instance.currentUser!;
   String? _selectionItem1;
   String? _selectionItem2;
 
@@ -56,7 +58,7 @@ class _AddDeviceState extends State<AddDevice> {
                             children: [
                               Text(
                                 'Srinivas Rao M',
-                                style: GoogleFonts.barlow(
+                                style: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w600)),
@@ -66,12 +68,14 @@ class _AddDeviceState extends State<AddDevice> {
                                 children: [
                                   Text(
                                     'Customer ID:',
-                                    style: GoogleFonts.barlow(
+                                    style: GoogleFonts.notoSans(
                                         textStyle: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500)),
                                   ),
-                                  const Text('45a678b-njn8843-29843bna83')
+                                  const Text(
+                                    '934uio9_345rt-231190Fy',
+                                  )
                                 ],
                               )
                             ],
@@ -81,104 +85,106 @@ class _AddDeviceState extends State<AddDevice> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                   DropdownButtonFormField2(
-                value: _selectionItem1,
-                decoration: InputDecoration(
-                  isDense: true,
-                  contentPadding: EdgeInsets.zero,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
+                  DropdownButtonFormField2(
+                    value: _selectionItem1,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    isExpanded: true,
+                    hint: const Text(
+                      'Select Automations',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 30,
+                    buttonHeight: 60,
+                    buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    items: _dropdownValue.keys
+                        .map<DropdownMenuItem<String>>(
+                            (String value) => DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                  ),
+                                ))
+                        .toList(),
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select Automations';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        _selectionItem1 = value;
+                        _selectionItem2 = null;
+                      });
+                    },
+                    onSaved: (value) {
+                      _selectionItem1 = value.toString();
+                    },
                   ),
-                ),
-                isExpanded: true,
-                hint: const Text(
-                  'Select Automations',
-                  style: TextStyle(fontSize: 14),
-                ),
-                icon:const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.black45,
-                ),
-                iconSize: 30,
-                buttonHeight: 60,
-                buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-                dropdownDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                items: _dropdownValue.keys
-                    .map<DropdownMenuItem<String>>(
-                        (String value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                              ),
-                            ))
-                    .toList(),
-                validator: (value) {
-                  if (value == null) {
-                    return 'Please select Automations';
-                  }
-                },
-                onChanged: (value) {
-                  setState(() {
-                    _selectionItem1 = value;
-                    _selectionItem2 = null;
-                  });
-                },
-                onSaved: (value) {
-                  _selectionItem1 = value.toString();
-                },
-              ),
-              const SizedBox(height: 30),
-               DropdownButtonFormField2(
-                value: _selectionItem2,
-                decoration: InputDecoration(
-                  isDense: true,
-                  contentPadding: EdgeInsets.zero,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
+                  const SizedBox(height: 30),
+                  DropdownButtonFormField2(
+                    value: _selectionItem2,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    isExpanded: true,
+                    hint: const Text(
+                      'Select Automations',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    icon: const Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: 30,
+                    buttonHeight: 60,
+                    buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    items: _selectionItem1 == null
+                        ? null
+                        : _dropdownValue[_selectionItem1]!
+                            .map<DropdownMenuItem<String>>(
+                                (String value) => DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(
+                                        value,
+                                      ),
+                                    ))
+                            .toList(),
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Please select Automations';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      setState(() {
+                        _selectionItem2 = value!;
+                      });
+                    },
+                    onSaved: (value) {
+                      _selectionItem2 = value.toString();
+                    },
                   ),
-                ),
-                isExpanded: true,
-                hint: const Text(
-                  'Select Automations',
-                  style: TextStyle(fontSize: 14),
-                ),
-                icon: const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.black45,
-                ),
-                iconSize: 30,
-                buttonHeight: 60,
-                buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-                dropdownDecoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                items: _selectionItem1 == null
-                          ? null
-                          : _dropdownValue[_selectionItem1]!
-                    .map<DropdownMenuItem<String>>(
-                        (String value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                              ),
-                            ))
-                    .toList(),
-                validator: (value) {
-                  if (value == null) {
-                    return 'Please select Automations';
-                  }
-                },
-                onChanged: (value) {
-                  setState(() {
-                   _selectionItem2 = value!;
-                  });
-                },
-                onSaved: (value) {
-                  _selectionItem2 = value.toString();
-                },
-              ),
                   /*Center(
                     child: Card(
                       shape: const RoundedRectangleBorder(

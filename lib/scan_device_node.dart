@@ -77,7 +77,7 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
                         "Data: ${result!.code}")
                     : Text(
                         "Tap to scan",
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w400)),
                       ),
@@ -87,7 +87,7 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     hintText: 'Serial No.',
-                    hintStyle: GoogleFonts.barlow(
+                    hintStyle: GoogleFonts.notoSans(
                         textStyle: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w400))),
               ),
@@ -109,7 +109,7 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
                       },
                       child: Text(
                         'ADD DEVICE',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 16, color: Colors.white)),
                       ))),

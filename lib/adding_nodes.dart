@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/drawer.dart';
@@ -11,12 +12,13 @@ class AddingNodes extends StatefulWidget {
 }
 
 class _AddingNodesState extends State<AddingNodes> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(centerTitle: false, actions: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png',scale: 2),
+          Image.asset('assets/images/11111-hdpi.png', scale: 2),
           /*Text('Launch.',
               style: GoogleFonts.caveat(
                 textStyle:
@@ -68,7 +70,7 @@ class _AddingNodesState extends State<AddingNodes> {
                       children: [
                         Text(
                           'Srinivas Rao M',
-                          style: GoogleFonts.barlow(
+                          style: GoogleFonts.notoSans(
                               textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600)),
                         ),
@@ -77,12 +79,12 @@ class _AddingNodesState extends State<AddingNodes> {
                           children: [
                             Text(
                               'Customer ID:',
-                              style: GoogleFonts.barlow(
+                              style: GoogleFonts.notoSans(
                                   textStyle: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500)),
                             ),
-                            const Text('45a678b-njn8843-29843bna83')
+                            const Text('93rtio-Y34dfbji-yionm')
                           ],
                         )
                       ],
@@ -94,8 +96,8 @@ class _AddingNodesState extends State<AddingNodes> {
             const SizedBox(height: 30),
             Text(
               'Installed Devices or Nodes',
-              style:
-                  GoogleFonts.barlow(textStyle: const TextStyle(fontSize: 16)),
+              style: GoogleFonts.notoSans(
+                  textStyle: const TextStyle(fontSize: 16)),
             ),
             const SizedBox(height: 50),
             const Center(
@@ -111,7 +113,7 @@ class _AddingNodesState extends State<AddingNodes> {
                 height: 100,
                 child: Text(
                   'No Nodes/Devices has been Installed',
-                  style: GoogleFonts.barlow(
+                  style: GoogleFonts.notoSans(
                       textStyle: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.w400)),
                   textAlign: TextAlign.center,
@@ -126,16 +128,16 @@ class _AddingNodesState extends State<AddingNodes> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueGrey),
                       onPressed: () {
-                         Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const ScanDeviceorNode()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const ScanDeviceorNode()));
                         // Navigator.pushNamed(context, '/ScanDeviceOrNode');
                       },
                       child: Text(
                         'ADD DEVICE',
-                        style: GoogleFonts.barlow(
+                        style: GoogleFonts.notoSans(
                             textStyle: const TextStyle(
                                 fontSize: 16, color: Colors.white)),
                       ))),

@@ -6,7 +6,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:launch_ele/drawer.dart';
 import 'package:launch_ele/wait_forapproval.dart';
 
-enum SingingCharacter { physicalDamage, batteryDamage, powerIssue, networkIssue }
+enum SingingCharacter {
+  physicalDamage,
+  batteryDamage,
+  powerIssue,
+  networkIssue
+}
 
 class ReplaceDevice extends StatefulWidget {
   const ReplaceDevice({super.key});
@@ -85,7 +90,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     selectedImagePath == ''
-                        ?  const Icon(
+                        ? const Icon(
                             Icons.image_sharp,
                             size: 150,
                             color: Colors.black,
@@ -159,7 +164,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                                     ),
                                     title: Text(
                                       'Request Raised: 11142564 is your service request number.',
-                                      style: GoogleFonts.barlow(
+                                      style: GoogleFonts.notoSans(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400),
                                     ),
@@ -175,7 +180,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                         },
                         child: Text(
                           'REQUESTE TO REPLACE',
-                          style: GoogleFonts.barlow(
+                          style: GoogleFonts.notoSans(
                               textStyle: const TextStyle(
                                   fontSize: 16, color: Colors.white)),
                         ))),
@@ -243,12 +248,12 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                                       content: Text('No Image Saelected !')));
                             }
                           },
-                          child: Card(
+                          child: const Card(
                             elevation: 5,
                             child: Padding(
-                              padding: const EdgeInsets.all(8),
+                              padding: EdgeInsets.all(8),
                               child: Column(
-                                children: const [
+                                children: [
                                   Icon(
                                     Icons.linked_camera_outlined,
                                     size: 50,
@@ -289,4 +294,3 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
     }
   }
 }
-

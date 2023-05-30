@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/device_with_info.dart';
@@ -13,6 +14,7 @@ class SearchDevice extends StatefulWidget {
 }
 
 class _SearchDeviceState extends State<SearchDevice> {
+  final user = FirebaseAuth.instance.currentUser!;
   SingingCharacter? _character = SingingCharacter.lafayette;
 
   @override
@@ -34,7 +36,7 @@ class _SearchDeviceState extends State<SearchDevice> {
                         children: [
                           Text(
                             'Search by Customer ID or Mobile No.',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                           ),
@@ -56,7 +58,7 @@ class _SearchDeviceState extends State<SearchDevice> {
                                 side:
                                     BorderSide(color: Colors.black, width: 1)),
                             child: SizedBox(
-                              width: 245,
+                              width: 255,
                               height: 220,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -65,21 +67,21 @@ class _SearchDeviceState extends State<SearchDevice> {
                                   children: [
                                     Text(
                                       'Srinivas Rao M',
-                                      style: GoogleFonts.barlow(
+                                      style: GoogleFonts.notoSans(
                                           textStyle: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w600)),
                                     ),
                                     Text(
                                       'Customer ID:',
-                                      style: GoogleFonts.barlow(
+                                      style: GoogleFonts.notoSans(
                                           textStyle: const TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w300)),
                                     ),
                                     Text(
-                                      '456art-3479koldfg-234mnkb-flo',
-                                      style: GoogleFonts.barlow(
+                                      user.uid,
+                                      style: GoogleFonts.notoSans(
                                           textStyle: const TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600)),
@@ -94,7 +96,7 @@ class _SearchDeviceState extends State<SearchDevice> {
                                           children: [
                                             Text(
                                               'Mobile No:',
-                                              style: GoogleFonts.barlow(
+                                              style: GoogleFonts.notoSans(
                                                   textStyle: const TextStyle(
                                                       fontSize: 12,
                                                       fontWeight:
@@ -102,7 +104,7 @@ class _SearchDeviceState extends State<SearchDevice> {
                                             ),
                                             Text(
                                               '9535047484',
-                                              style: GoogleFonts.barlow(
+                                              style: GoogleFonts.notoSans(
                                                   textStyle: const TextStyle(
                                                       fontSize: 12,
                                                       fontWeight:
@@ -117,7 +119,7 @@ class _SearchDeviceState extends State<SearchDevice> {
                                           children: [
                                             Text(
                                               'Email ID',
-                                              style: GoogleFonts.barlow(
+                                              style: GoogleFonts.notoSans(
                                                   textStyle: const TextStyle(
                                                       fontSize: 12,
                                                       fontWeight:
@@ -125,7 +127,7 @@ class _SearchDeviceState extends State<SearchDevice> {
                                             ),
                                             Text(
                                               'Srinivas.rao@gmail.com',
-                                              style: GoogleFonts.barlow(
+                                              style: GoogleFonts.notoSans(
                                                   textStyle: const TextStyle(
                                                       fontSize: 12,
                                                       fontWeight:
@@ -137,14 +139,14 @@ class _SearchDeviceState extends State<SearchDevice> {
                                     ),
                                     Text(
                                       'Property:',
-                                      style: GoogleFonts.barlow(
+                                      style: GoogleFonts.notoSans(
                                           textStyle: const TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w300)),
                                     ),
                                     Text(
                                       'B-102, Engrace by ModernSpaces Sarjapur Road, Banglore - 562162',
-                                      style: GoogleFonts.barlow(
+                                      style: GoogleFonts.notoSans(
                                           textStyle: const TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w700)),
@@ -174,17 +176,17 @@ class _SearchDeviceState extends State<SearchDevice> {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.blueGrey),
                                     onPressed: () {
-                                       Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const DeviceWithInfo()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  const DeviceWithInfo()));
                                       // Navigator.pushNamed(
-                                          // context, '/DeviceWithInfo');
+                                      // context, '/DeviceWithInfo');
                                     },
                                     child: Text(
                                       'NEXT',
-                                      style: GoogleFonts.barlow(
+                                      style: GoogleFonts.notoSans(
                                           textStyle: const TextStyle(
                                               fontSize: 16,
                                               color: Colors.white)),

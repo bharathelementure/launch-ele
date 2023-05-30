@@ -22,19 +22,19 @@ class NavDrawer extends StatelessWidget {
               ),
               Text(
                 'Nagathihalli Bharath',
-                style: GoogleFonts.barlow(
+                style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w600)),
               ),
               Text(
                 user.email!,
-                style: GoogleFonts.barlow(
+                style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w400)),
               ),
               Text(
-                '+91 9743731707',
-                style: GoogleFonts.barlow(
+                user.phoneNumber!,
+                style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w500)),
               ),
@@ -51,7 +51,7 @@ class NavDrawer extends StatelessWidget {
                   },
                   child: Text(
                     'Reach Out Customer Care',
-                    style: GoogleFonts.barlow(
+                    style: GoogleFonts.notoSans(
                         textStyle: const TextStyle(
                             decoration: TextDecoration.underline,
                             fontSize: 16,

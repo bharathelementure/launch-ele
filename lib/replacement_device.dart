@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +14,7 @@ class ReplaceDeviceorNode extends StatefulWidget {
 }
 
 class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
+  final user = FirebaseAuth.instance.currentUser!;
   final GlobalKey _globalKey = GlobalKey();
   QRViewController? controller;
   Barcode? result;
@@ -30,7 +32,7 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
     return Scaffold(
         appBar: AppBar(centerTitle: false, actions: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png',scale: 2),
+            Image.asset('assets/images/11111-hdpi.png', scale: 2),
           ]),
         ]),
         drawer: const NavDrawer(),
@@ -58,7 +60,7 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                                     children: [
                                       Text(
                                         'Srinivas Rao M',
-                                        style: GoogleFonts.barlow(
+                                        style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600)),
@@ -69,14 +71,13 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                                         children: [
                                           Text(
                                             'Customer ID:',
-                                            style: GoogleFonts.barlow(
+                                            style: GoogleFonts.notoSans(
                                                 textStyle: const TextStyle(
                                                     fontSize: 12,
                                                     fontWeight:
                                                         FontWeight.w500)),
                                           ),
-                                          const Text(
-                                              '45a678b-njn8843-29843bna83')
+                                          const Text('9034oi-tYoplsdf-234dfgr')
                                         ],
                                       )
                                     ],
@@ -100,14 +101,14 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                                       children: [
                                         Text(
                                           'Aquesa Measure with Control',
-                                          style: GoogleFonts.barlow(
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600)),
                                         ),
                                         Text(
-                                          '95a54hij-oploserti-nm24560dgh',
-                                          style: GoogleFonts.barlow(
+                                          user.uid,
+                                          style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w300)),
@@ -118,15 +119,15 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                           const SizedBox(height: 20),
                           Text(
                             'Scan the New Node or Device',
-                            style: GoogleFonts.barlow(
+                            style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(fontSize: 16)),
                           ),
                           Center(
                             child: SizedBox(
                                 height: 250,
                                 width: 250,
-                                child:
-                                    QRView(key: _globalKey, onQRViewCreated: qr)),
+                                child: QRView(
+                                    key: _globalKey, onQRViewCreated: qr)),
                           ),
                           Center(
                             child: (result != null)
@@ -135,7 +136,7 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                                     "Data: ${result!.code}")
                                 : Text(
                                     "Tap to scan",
-                                    style: GoogleFonts.barlow(
+                                    style: GoogleFonts.notoSans(
                                         textStyle: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.w400)),
@@ -146,7 +147,7 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                             decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
                                 hintText: 'Serial No.',
-                                hintStyle: GoogleFonts.barlow(
+                                hintStyle: GoogleFonts.notoSans(
                                     textStyle: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400))),
@@ -160,17 +161,17 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.blueGrey),
                                     onPressed: () {
-                                       Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const AddDeviceInfo()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  const AddDeviceInfo()));
                                       // Navigator.pushNamed(
-                                          // context, '/AddDeviceInfo');
+                                      // context, '/AddDeviceInfo');
                                     },
                                     child: Text(
                                       'ADD DEVICE',
-                                      style: GoogleFonts.barlow(
+                                      style: GoogleFonts.notoSans(
                                           textStyle: const TextStyle(
                                               fontSize: 16,
                                               color: Colors.white)),
