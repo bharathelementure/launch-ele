@@ -30,7 +30,7 @@ class _DashBoardState extends State<DashBoard> {
       drawer: const NavDrawer(),
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.all(12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +106,7 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         )),
                     Text(
-                      'Find Device',
+                      'Customer ID',
                       style: GoogleFonts.notoSans(
                           textStyle: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold)),
@@ -149,16 +149,16 @@ class _DashBoardState extends State<DashBoard> {
                 )
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             Text(
               'Recent Activities',
               style: GoogleFonts.notoSans(
                   textStyle: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w400)),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
             SizedBox(
-              height: 436,
+              height: 414,
               // width: double.infinity,
               child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -178,7 +178,7 @@ class _DashBoardState extends State<DashBoard> {
                                   borderRadius: BorderRadius.circular(12)),*/
                               child: SizedBox(
                                 width: 290,
-                                height: 130,
+                                height: 140,
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Column(
@@ -216,7 +216,7 @@ class _DashBoardState extends State<DashBoard> {
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        user.uid,
+                                        'y9HFKn0YuPnt-2tfyDklotr',
                                         style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
@@ -231,7 +231,7 @@ class _DashBoardState extends State<DashBoard> {
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        user.uid,
+                                        'ioP0-Dffhtyuioasdgwc-345',
                                         style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
@@ -255,7 +255,7 @@ class _DashBoardState extends State<DashBoard> {
                                   borderRadius: BorderRadius.circular(12)),*/
                               child: SizedBox(
                                 width: 290,
-                                height: 130,
+                                height: 140,
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Column(
@@ -293,7 +293,7 @@ class _DashBoardState extends State<DashBoard> {
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        user.uid,
+                                        'dfG90-njisfgnnc89n',
                                         style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,
@@ -308,7 +308,7 @@ class _DashBoardState extends State<DashBoard> {
                                                 fontWeight: FontWeight.w600)),
                                       ),
                                       Text(
-                                        user.uid,
+                                        'ghr0-io03lo-vbnjiasdg-kloert',
                                         style: GoogleFonts.notoSans(
                                             textStyle: const TextStyle(
                                                 fontSize: 12,

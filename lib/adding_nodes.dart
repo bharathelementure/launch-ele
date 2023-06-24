@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:launch_ele/add_device_info.dart';
 import 'package:launch_ele/drawer.dart';
 import 'package:launch_ele/scan_device_node.dart';
+// import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class AddingNodes extends StatefulWidget {
-  const AddingNodes({super.key});
+  const AddingNodes({super.key, required this.scanedDevice});
+  final String scanedDevice;
 
   @override
   State<AddingNodes> createState() => _AddingNodesState();
@@ -13,38 +16,13 @@ class AddingNodes extends StatefulWidget {
 
 class _AddingNodesState extends State<AddingNodes> {
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(centerTitle: false, actions: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          /*Text('Launch.',
-              style: GoogleFonts.caveat(
-                textStyle:
-                    const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 25,
-              ),
-              Text(
-                'by Elementure',
-                style: GoogleFonts.barlow(
-                    textStyle: const TextStyle(
-                        fontSize: 12, fontWeight: FontWeight.bold)),
-              ),
-              const Text(
-                '.',
-                style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),*/
         ]),
       ]),
       drawer: const NavDrawer(),
@@ -99,8 +77,63 @@ class _AddingNodesState extends State<AddingNodes> {
               style: GoogleFonts.notoSans(
                   textStyle: const TextStyle(fontSize: 16)),
             ),
+            const SizedBox(height: 20),
+            Table(
+              defaultColumnWidth: const FixedColumnWidth(150),
+              border: TableBorder.all(
+                  color: Colors.black, style: BorderStyle.solid, width: 2),
+              children: [
+                const TableRow(children: [
+                  Column(
+                    children: [
+                      Text(
+                        'Device ID',
+                        style: TextStyle(fontSize: 14),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        'Take a snap',
+                        style: TextStyle(fontSize: 14),
+                      )
+                    ],
+                  ),
+                ]),
+                TableRow(children: [
+                  Column(
+                    children: [
+                      Text(
+                        widget.scanedDevice,
+                        style: const TextStyle(fontSize: 14),
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        AddDeviceInfo(
+                                            snapDeviceId:
+                                                widget.scanedDevice)));
+                          },
+                          icon: const Icon(
+                            Icons.linked_camera_rounded,
+                            size: 30,
+                            color: Colors.black,
+                          ))
+                    ],
+                  ),
+                ]),
+              ],
+            ),
             const SizedBox(height: 50),
-            const Center(
+            /*const Center(
               child: Icon(
                 Icons.info,
                 size: 50,
@@ -119,7 +152,7 @@ class _AddingNodesState extends State<AddingNodes> {
                   textAlign: TextAlign.center,
                 ),
               ),
-            ),
+            ),*/
             Center(
               child: SizedBox(
                   height: 50,

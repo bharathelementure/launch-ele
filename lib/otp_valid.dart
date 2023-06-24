@@ -11,38 +11,14 @@ class OTPValid extends StatefulWidget {
 }
 
 class _OTPValidState extends State<OTPValid> {
+  get result => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(centerTitle: false, actions: [
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png',scale: 2),
-          /*Text('Launch.',
-              style: GoogleFonts.caveat(
-                textStyle:
-                    const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 25,
-              ),
-              Text(
-                'by Elementure',
-                style: GoogleFonts.barlow(
-                    textStyle: const TextStyle(
-                        fontSize: 12, fontWeight: FontWeight.bold)),
-              ),
-              const Text(
-                '.',
-                style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),*/
+          Image.asset('assets/images/11111-hdpi.png', scale: 2),
         ]),
       ]),
       drawer: const NavDrawer(),
@@ -84,28 +60,29 @@ class _OTPValidState extends State<OTPValid> {
                   textAlign: TextAlign.center,
                 )),
           ),
-           Center(
-             child: SizedBox(
-                    height: 50,
-                    width: 290,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueGrey),
-                        onPressed: () {
-                           Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const AddingNodes()));
-                          // Navigator.pushNamed(context, '/AddingNodes');
-                        },
-                        child: Text(
-                          'ADD DEVICE',
-                          style: GoogleFonts.notoSans(
-                              textStyle: const TextStyle(
-                                  fontSize: 16, color: Colors.white)),
-                        ))),
-           )
+          Center(
+            child: SizedBox(
+                height: 50,
+                width: 290,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueGrey),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => AddingNodes(
+                                    scanedDevice: result.toString(),
+                                  )));
+                      // Navigator.pushNamed(context, '/AddingNodes');
+                    },
+                    child: Text(
+                      'ADD DEVICE',
+                      style: GoogleFonts.notoSans(
+                          textStyle: const TextStyle(
+                              fontSize: 16, color: Colors.white)),
+                    ))),
+          )
         ],
       )),
     );

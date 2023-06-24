@@ -1,7 +1,9 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:launch_ele/customer_type.dart';
 import 'package:launch_ele/drawer.dart';
 import 'package:launch_ele/otp_valid.dart';
 import 'package:pinput/pinput.dart';
@@ -117,36 +119,46 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blueGrey),
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                      backgroundColor: Colors.grey.shade200,
-                                      shape: RoundedRectangleBorder(
-                                          side: const BorderSide(
-                                              color: Colors.black, width: 2),
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      icon: const Icon(
-                                        Icons.close_outlined,
-                                        size: 50,
-                                        color: Colors.black,
-                                      ),
-                                      title: Text(
-                                        'Kindly Check OTP Entered',
-                                        style: GoogleFonts.notoSans(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      content: const Text(
-                                          'You can get a new OTP by clicking Resend Button after 30 Seconds'),
-                                    ));
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const OTPValid()));
-                            // Navigator.pushNamed(context, '/OTPValid');
+                          onPressed: () async {
+                            try {
+                              PhoneAuthCredential credential =
+                                  PhoneAuthProvider.credential(
+                                      verificationId: CustomerType.verify,
+                                      smsCode: code);
+
+                              await FirebaseAuth.instance
+                                  .signInWithPhoneNumber(credential as String);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const OTPValid()));
+                            } catch (e) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                        backgroundColor: Colors.grey.shade200,
+                                        shape: RoundedRectangleBorder(
+                                            side: const BorderSide(
+                                                color: Colors.black, width: 2),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        icon: const Icon(
+                                          Icons.close_outlined,
+                                          size: 50,
+                                          color: Colors.black,
+                                        ),
+                                        title: Text(
+                                          'Kindly Check OTP Entered',
+                                          style: GoogleFonts.notoSans(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        content: const Text(
+                                            'You can get a new OTP by clicking Resend Button after 30 Seconds'),
+                                      ));
+                            }
                           },
                           child: Text(
                             'SUBMIT',

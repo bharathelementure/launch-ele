@@ -165,10 +165,10 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
                 },
                 onChanged: (value) {
                   setState(() {
-                    print(_dropdownValue);
-                    print(_selectionItem1);
                     _selectionItem1 = value;
                     _selectionItem2 = null;
+                    // print(_dropdownValue);
+                    print(_selectionItem1);
                   });
                 },
                 onSaved: (value) {

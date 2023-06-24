@@ -1,19 +1,30 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/drawer.dart';
 import 'package:launch_ele/new_customer_otp.dart';
+import 'package:launch_ele/otp_valid.dart';
 import 'package:launch_ele/search_device.dart';
 
 class CustomerType extends StatefulWidget {
   const CustomerType({super.key});
+
+  static String verify = "";
 
   @override
   State<CustomerType> createState() => _CustomerTypeState();
 }
 
 class _CustomerTypeState extends State<CustomerType> {
-  final List<String> propertyItems = ['Soultree', 'Urban Nest', 'Engrace'];
+  final List<String> propertyItems = [
+    'Soultree',
+    'Urban Nest',
+    'Engrace',
+    'Others'
+  ];
 
   String? selectedValue;
 
@@ -22,6 +33,15 @@ class _CustomerTypeState extends State<CustomerType> {
   final mobileController = TextEditingController();
   final emailController = TextEditingController();
   final addressController = TextEditingController();
+  FirebaseDatabase databasae = FirebaseDatabase.instance;
+  var phone = '';
+
+  @override
+  void initState() {
+    mobileController.text = '+91';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,6 +166,7 @@ class _CustomerTypeState extends State<CustomerType> {
                     TextFormField(
                       controller: nameController,
                       keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           label: Text(
@@ -159,6 +180,7 @@ class _CustomerTypeState extends State<CustomerType> {
                     TextFormField(
                       controller: mobileController,
                       keyboardType: TextInputType.phone,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           label: Text(
@@ -172,6 +194,7 @@ class _CustomerTypeState extends State<CustomerType> {
                     TextFormField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           label: Text(
@@ -222,9 +245,15 @@ class _CustomerTypeState extends State<CustomerType> {
                         }
                         return null;
                       },
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        setState(() {
+                          selectedValue = value;
+                          print(selectedValue);
+                        });
+                      },
                       onSaved: (value) {
                         selectedValue = value.toString();
+                        print(selectedValue);
                       },
                     ),
                     /*const SizedBox(height: 10),
@@ -268,6 +297,7 @@ class _CustomerTypeState extends State<CustomerType> {
                     const SizedBox(height: 10),
                     TextFormField(
                       keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           label: Text(
@@ -277,7 +307,7 @@ class _CustomerTypeState extends State<CustomerType> {
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
                     ),
-                    const SizedBox(height: 10),
+                    /*const SizedBox(height: 10),
                     TextFormField(
                       controller: addressController,
                       keyboardType: TextInputType.streetAddress,
@@ -301,12 +331,13 @@ class _CustomerTypeState extends State<CustomerType> {
                                 textStyle: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
-                    ),
+                    ),*/
                     const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blueGrey),
                       onPressed: () {
+                        verifyPhoneNumber();
                         showDialog(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
@@ -350,6 +381,29 @@ class _CustomerTypeState extends State<CustomerType> {
           ),
         )),
       ),
+    );
+  }
+
+  // Phone number otp
+  Future verifyPhoneNumber() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: mobileController.text + phone,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {
+        Fluttertoast.showToast(
+            msg: "Please Enter a Valid Number",
+            fontSize: 18,
+            backgroundColor: const Color(0xFF2292D7),
+            textColor: const Color(0xFFFFFFFF));
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        CustomerType.verify = verificationId;
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => const OTPValid()));
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 }

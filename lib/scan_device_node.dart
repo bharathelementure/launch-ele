@@ -1,9 +1,13 @@
-// import 'package:camera/camera.dart';
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/add_device_info.dart';
+import 'package:launch_ele/adding_nodes.dart';
 import 'package:launch_ele/drawer.dart';
+import 'package:http/http.dart' as http;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanDeviceorNode extends StatefulWidget {
@@ -13,7 +17,10 @@ class ScanDeviceorNode extends StatefulWidget {
   State<ScanDeviceorNode> createState() => _ScanDeviceorNodeState();
 }
 
+String? scanedDivice;
+
 class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
+  final user = FirebaseAuth.instance.currentUser!;
   final GlobalKey _globalKey = GlobalKey();
   QRViewController? controller;
   Barcode? result;
@@ -26,38 +33,30 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
     });
   }
 
+  Future scandDeviceId() async {
+    final rdata = {"customer_id": user.uid, "device_id": "${result!.code}"};
+    final jsonString = json.encode(rdata);
+    final uir = Uri.parse("http://192.168.0.126:8070/CustomerIDs");
+    http.Response response;
+    response = await http.post(uir, body: jsonString);
+    print(response.body);
+    if (response.statusCode == 200) {
+      setState(() {
+        scanedDivice = response.body;
+      });
+      print(scanedDivice);
+      return response.toString();
+    } else {
+      return const CircularProgressIndicator();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(centerTitle: false, actions: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png',scale: 2),
-            /*Text('Launch.',
-                style: GoogleFonts.caveat(
-                  textStyle: const TextStyle(
-                      fontSize: 26, fontWeight: FontWeight.bold),
-                )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: 25,
-                ),
-                Text(
-                  'by Elementure',
-                  style: GoogleFonts.barlow(
-                      textStyle: const TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.bold)),
-                ),
-                const Text(
-                  '.',
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold),
-                )
-              ],
-            ),*/
+            Image.asset('assets/images/11111-hdpi.png', scale: 2),
           ]),
         ]),
         drawer: const NavDrawer(),
@@ -70,7 +69,13 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
               SizedBox(
                   height: 300,
                   width: 300,
-                  child: QRView(key: _globalKey, onQRViewCreated: qr)),
+                  child: QRView(
+                      key: _globalKey,
+                      onQRViewCreated: qr,
+                      overlay: QrScannerOverlayShape(
+                          borderRadius: 10,
+                          borderWidth: 5,
+                          borderColor: Colors.white))),
               Center(
                 child: (result != null)
                     ? Text("Barcode Type: ${describeEnum(result!.format)} "
@@ -93,27 +98,34 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
               ),
               const SizedBox(height: 20),
               Center(
-              child: SizedBox(
-                  height: 50,
-                  width: 290,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueGrey),
-                      onPressed: () {
-                         Navigator.push(
+                child: SizedBox(
+                    height: 50,
+                    width: 290,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blueGrey),
+                        onPressed: () {
+                          scandDeviceId();
+                          result?.code == null
+                              ? Fluttertoast.showToast(
+                                  msg: 'Please Scan the Qr-Code!')
+                              : Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                           const AddDeviceInfo()));
-                        // Navigator.pushNamed(context, '/AddDeviceInfo');
-                      },
-                      child: Text(
-                        'ADD DEVICE',
-                        style: GoogleFonts.notoSans(
-                            textStyle: const TextStyle(
-                                fontSize: 16, color: Colors.white)),
-                      ))),
-            ),
+                                          AddingNodes(
+                                            scanedDevice:
+                                                result!.code.toString(),
+                                          )));
+                          // Navigator.pushNamed(context, '/AddDeviceInfo');
+                        },
+                        child: Text(
+                          'ADD DEVICE',
+                          style: GoogleFonts.notoSans(
+                              textStyle: const TextStyle(
+                                  fontSize: 16, color: Colors.white)),
+                        ))),
+              ),
             ]),
           ),
         )));

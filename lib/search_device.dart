@@ -16,6 +16,7 @@ class SearchDevice extends StatefulWidget {
 class _SearchDeviceState extends State<SearchDevice> {
   final user = FirebaseAuth.instance.currentUser!;
   SingingCharacter? _character = SingingCharacter.lafayette;
+  bool selectsigingCharacter = true;
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +155,7 @@ class _SearchDeviceState extends State<SearchDevice> {
                                     ListTile(
                                       title: const Text(''),
                                       leading: Radio<SingingCharacter>(
+                                          toggleable: selectsigingCharacter,
                                           value: SingingCharacter.lafayette,
                                           groupValue: _character,
                                           onChanged: (SingingCharacter? value) {

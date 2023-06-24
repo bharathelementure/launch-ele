@@ -9,6 +9,8 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 class ReplaceDeviceorNode extends StatefulWidget {
   const ReplaceDeviceorNode({super.key});
 
+  get scanedDevice => null;
+
   @override
   State<ReplaceDeviceorNode> createState() => _ReplaceDeviceorNodeState();
 }
@@ -165,7 +167,10 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
-                                                  const AddDeviceInfo()));
+                                                  AddDeviceInfo(
+                                                      snapDeviceId: widget
+                                                          .scanedDevice
+                                                          .toString())));
                                       // Navigator.pushNamed(
                                       // context, '/AddDeviceInfo');
                                     },
