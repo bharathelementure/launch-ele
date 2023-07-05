@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:launch_ele/device_with_info.dart';
@@ -28,12 +29,12 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
     final rdata = {
       "customer_id": user.uid,
       "device_id": widget.snapDeviceId,
-      "picture": img64
-      // selectedImagePath.split('/').last
+      "picture": img64,
+      // "selected_shaft": selectedValue
     };
     print(rdata);
     final jsonString = json.encode(rdata);
-    final uir = Uri.parse("http://192.168.0.126:8090/upload");
+    final uir = Uri.parse("http://192.168.0.126:8090/upload/");
     http.Response response;
     response = await http.post(uir, body: jsonString);
     print(response.body);
@@ -46,57 +47,6 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
       return const CircularProgressIndicator();
     }
   }
-
-  /*snapDevice() async {
-    final rdata = {"customer_id": user.uid, "device_id": widget.snapDeviceId};
-    final jsonString = json.encode(rdata);
-    final url = Uri.parse("http://192.168.0.126:8090/upload_image/");
-
-    var reque = http.MultipartRequest("POST", url)
-      ..fields["customer"] = user.uid
-      ..fields["device_id"] = widget.snapDeviceId
-      ..files
-          .add(await http.MultipartFile.fromPath('image', selectedImagePath));
-    var response = await reque.send();
-    if (response.statusCode == 200) {
-      print(response);
-      print("Uploaded");
-    } else {
-      print("Failed");
-    }
-    // request.send().then((response) {
-    //   if (response.statusCode == 200) {
-    //     print(response);
-    //     print("Uploaded");
-    //   } else {
-    //     print("Failed");
-    //   }
-    // });
-  }*/
-
-  /*openImage() async {
-    try {
-      var pickedFile = await ImagePicker()
-          .pickImage(source: ImageSource.camera, imageQuality: 100);
-      if (pickedFile != null) {
-        imagepath = pickedFile.path;
-        print(imagepath);
-
-        File imagefile = File(imagepath);
-        Uint8List imagebytes = await imagefile.readAsBytes();
-        String base64string = base64.encode(imagebytes);
-        print(base64string);
-
-        // Unit8List decodebytes = base64.decode(base64string);
-
-        setState(() {});
-      } else {
-        print("No image is selected!");
-      }
-    } catch (e) {
-      print('error while picking a file.');
-    }
-  }*/
 
   final user = FirebaseAuth.instance.currentUser!;
   final List<String> homeShaftItems = [
@@ -169,12 +119,6 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                         textStyle: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.w500)),
                   ),
-                  // Text(
-                  //   widget.snapDeviceId,
-                  //   style: GoogleFonts.notoSans(
-                  //       textStyle: const TextStyle(
-                  //           fontSize: 12, fontWeight: FontWeight.w600)),
-                  // ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -272,7 +216,12 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                   }
                   return null;
                 },
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue = value;
+                    print(selectedValue);
+                  });
+                },
                 onSaved: (value) {
                   selectedValue = value.toString();
                 },
@@ -322,11 +271,15 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                             backgroundColor: Colors.blueGrey),
                         onPressed: () {
                           snapDevice();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      const DeviceWithInfo()));
+                          selectedImagePath == ""
+                              ? Fluttertoast.showToast(
+                                  msg:
+                                      'Please take the snap \n of installed device')
+                              : Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const DeviceWithInfo()));
                           // Navigator.pushNamed(context, '/DeviceWithInfo');
                         },
                         child: Text(

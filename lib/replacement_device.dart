@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/add_device_info.dart';
+import 'package:launch_ele/api/scan_device_id.dart';
 import 'package:launch_ele/drawer.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -163,16 +165,19 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.blueGrey),
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  AddDeviceInfo(
-                                                      snapDeviceId: widget
-                                                          .scanedDevice
-                                                          .toString())));
-                                      // Navigator.pushNamed(
-                                      // context, '/AddDeviceInfo');
+                                      scandDeviceId();
+                                      result?.code == null
+                                          ? Fluttertoast.showToast(
+                                              msg: 'Please Scan the Qr-Code!')
+                                          : Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      AddDeviceInfo(
+                                                          snapDeviceId: result!
+                                                              .code
+                                                              .toString())));
                                     },
                                     child: Text(
                                       'ADD DEVICE',
