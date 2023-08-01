@@ -1,8 +1,10 @@
+// AppBar Drawer
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/customer_type.dart';
-import 'package:launch_ele/dash_board.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/customer_type.dart';
+import 'package:launch_ele/src/screens/dashBoard/dash_board.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
@@ -22,24 +24,13 @@ class NavDrawer extends StatelessWidget {
                 Icons.account_circle_rounded,
                 size: 100,
               ),
-              /*Text(
-                'Nagathihalli Bharath',
-                style: GoogleFonts.notoSans(
-                    textStyle: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w600)),
-              ),*/
               Text(
                 user.email!,
                 style: GoogleFonts.notoSans(
                     textStyle: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w400)),
               ),
-              /*Text(
-                user.phoneNumber!,
-                style: GoogleFonts.notoSans(
-                    textStyle: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w500)),
-              ),*/
+              // Call back's to home screen
               ListTile(
                 leading: const Icon(
                   Icons.home,
@@ -60,6 +51,7 @@ class NavDrawer extends StatelessWidget {
                   }));
                 },
               ),
+              // Call's to Add Customer Screen
               ListTile(
                 leading: const Icon(
                   Icons.add,

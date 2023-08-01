@@ -1,8 +1,11 @@
+// Search the customer by customerID or mobileNO.
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/device_with_info.dart';
-import 'package:launch_ele/drawer.dart';
+import 'package:launch_ele/src/screens/device_info/device_with_info.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
 
 enum SingingCharacter { lafayette }
 
@@ -21,11 +24,7 @@ class _SearchDeviceState extends State<SearchDevice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: false, actions: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          ]),
-        ]),
+        appBar: const AppBarBoard(),
         drawer: const NavDrawer(),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -183,8 +182,6 @@ class _SearchDeviceState extends State<SearchDevice> {
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
                                                   const DeviceWithInfo()));
-                                      // Navigator.pushNamed(
-                                      // context, '/DeviceWithInfo');
                                     },
                                     child: Text(
                                       'NEXT',

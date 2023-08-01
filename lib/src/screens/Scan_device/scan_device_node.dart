@@ -1,3 +1,5 @@
+// Scan Device to add in list
+
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,8 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/adding_nodes.dart';
-import 'package:launch_ele/drawer.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/adding_nodes.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -39,12 +41,12 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
     final uir = Uri.parse("http://192.168.0.126:8070/CustomerIDs");
     http.Response response;
     response = await http.post(uir, body: jsonString);
-    print(response.body);
+    // print(response.body);
     if (response.statusCode == 200) {
       setState(() {
         scanedDivice = response.body;
       });
-      print(scanedDivice);
+      // print(scanedDivice);
       return response.toString();
     } else {
       return const CircularProgressIndicator();
@@ -54,18 +56,15 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: false, actions: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          ]),
-        ]),
-        drawer: const NavDrawer(),
+        appBar: const AppBarBoard(),
+        // drawer: const NavDrawer(),
         body: SafeArea(
             child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(18),
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              // Qr_code scanner view
               SizedBox(
                   height: 300,
                   width: 300,
@@ -117,7 +116,6 @@ class _ScanDeviceorNodeState extends State<ScanDeviceorNode> {
                                             scanedDevice:
                                                 result!.code.toString(),
                                           )));
-                          // Navigator.pushNamed(context, '/AddDeviceInfo');
                         },
                         child: Text(
                           'ADD DEVICE',

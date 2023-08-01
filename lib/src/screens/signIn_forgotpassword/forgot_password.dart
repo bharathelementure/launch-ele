@@ -1,7 +1,9 @@
+// Reset password
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/recover_credentials.dart';
-import 'package:launch_ele/signin_screen.dart';
+import 'package:launch_ele/src/authentication/recover_credentials.dart';
+import 'package:launch_ele/src/screens/signIn_forgotpassword/signin_screen.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -96,7 +98,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const SignInScreen()));
-                      // Navigator.pushNamed(context, '/SignInScreen');
                     },
                     child: Text(
                       'SIGN IN',
@@ -137,19 +138,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                   ),
                                   content: const Text(
                                       'If you don\'t have access, kindly connect to vendor for the Access.'),
-                                  /*actions: [
-                                        TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, 'OK'),
-                                            child: const Text('OK'))
-                                      ]*/
                                 ));
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     const RecoverCredentials()));
-                        // Navigator.pushNamed(context, '/RecoverCredentials');
                       },
                       child: Text(
                         'FORGOT PASSWORD',

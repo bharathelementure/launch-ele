@@ -1,10 +1,10 @@
+// SignIn with Authentication
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:launch_ele/forgot_password.dart';
+import 'package:launch_ele/src/screens/signIn_forgotpassword/forgot_password.dart';
 import 'package:launch_ele/main.dart';
-import 'package:overlay_support/overlay_support.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -16,7 +16,6 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final _emailcontroller = TextEditingController();
   final _passwordcontroller = TextEditingController();
-  bool _hasInternet = false;
 
   @override
   void dispose() {
@@ -41,32 +40,6 @@ class _SignInScreenState extends State<SignInScreen> {
               Image.asset(
                 'assets/images/11111-hdpi.png',
               ),
-              /*Text('Launch.',
-                  style: GoogleFonts.caveat(
-                    textStyle: const TextStyle(
-                        fontSize: 41, fontWeight: FontWeight.bold),
-                  )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    width: 45,
-                  ),
-                  Text(
-                    'by Elementure',
-                    style: GoogleFonts.barlow(
-                        textStyle: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                  ),
-                  const Text(
-                    '.',
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),*/
               const SizedBox(
                 height: 40,
               ),
@@ -116,7 +89,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     const ForgotPassword()));
-                        // Navigator.pushNamed(context, '/ForgotPassword');
                       },
                       child: Text(
                         'Forgot Password',
@@ -136,50 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueGrey),
                         onPressed: () async {
-                          /*showDialog(
-                              context: context,
-                              builder: (BuildContext context) => AlertDialog(
-                                    backgroundColor: Colors.grey.shade200,
-                                    shape: RoundedRectangleBorder(
-                                        side: const BorderSide(
-                                            color: Colors.black, width: 2),
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
-                                    icon: const Icon(
-                                      Icons.info,
-                                      size: 50,
-                                      color: Colors.black,
-                                    ),
-                                    title: Text(
-                                      'Please check your Credentials!',
-                                      style: GoogleFonts.barlow(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    content: const Text(
-                                        'If you don\'t have access, kindly connect to vendor for the Acccess.'),
-                                  ));*/
                           signIn();
-                          _hasInternet =
-                              await InternetConnectionChecker().hasConnection;
-                          final color =
-                              _hasInternet ? Colors.green : Colors.red;
-                          final text =
-                              _hasInternet ? 'Internet' : 'No Internet';
-
-                          showSimpleNotification(
-                              Text(text,
-                                  style: GoogleFonts.notoSans(
-                                    textStyle: const TextStyle(
-                                        fontSize: 16, color: Colors.white),
-                                  )),
-                              background: color);
-                          /*Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const DashBoard()));*/
-                          // Navigator.pushNamed(context, '/DashBoard');
                         },
                         child: Text(
                           'SIGN IN',

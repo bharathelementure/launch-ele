@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/add_device_info.dart';
-import 'package:launch_ele/device_id_list.dart';
-import 'package:launch_ele/drawer.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/add_device_info.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/adddevice_widgets/device_id_list.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
 import 'package:http/http.dart' as http;
-import 'package:launch_ele/scan_device_node.dart';
+import 'package:launch_ele/src/screens/Scan_device/scan_device_node.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/customer_widget/customer_details.dart';
 
 class AddingNodes extends StatefulWidget {
   const AddingNodes({super.key, required this.scanedDevice});
@@ -59,11 +61,7 @@ class _AddingNodesState extends State<AddingNodes> {
   Widget build(BuildContext context) {
     List deviList = devidList;
     return Scaffold(
-      appBar: AppBar(centerTitle: false, actions: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png', scale: 2),
-        ]),
-      ]),
+      appBar: const AppBarBoard(),
       drawer: const NavDrawer(),
       body: SafeArea(
           child: Padding(
@@ -73,42 +71,8 @@ class _AddingNodesState extends State<AddingNodes> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            Center(
-              child: Card(
-                shape: const RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black, width: 1)),
-                child: SizedBox(
-                  width: 310,
-                  height: 70,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Srinivas Rao M',
-                          style: GoogleFonts.notoSans(
-                              textStyle: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600)),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Customer ID:',
-                              style: GoogleFonts.notoSans(
-                                  textStyle: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500)),
-                            ),
-                            const Text('93rtio-Y34dfbji-yionm')
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+            const Center(
+              child: CustomerDetails(),
             ),
             const SizedBox(height: 30),
             Text(
@@ -116,6 +80,7 @@ class _AddingNodesState extends State<AddingNodes> {
               style: GoogleFonts.notoSans(
                   textStyle: const TextStyle(fontSize: 16)),
             ),
+            // Creation Table view for DeviceID and Snap
             Table(
                 defaultColumnWidth: const FixedColumnWidth(162),
                 border: TableBorder.all(
@@ -182,46 +147,37 @@ class _AddingNodesState extends State<AddingNodes> {
                     ),
                   ]),
                 ]),
+            // List of diviceIdlist fetch through appi's
             SizedBox(
               height: 250,
               child: DiviceIdList(
                   devidList: devidList, deviList: deviList, widget: widget),
             ),
             const SizedBox(height: 30),
-            const Center(
-              child: AddDevicebtn(),
+            Center(
+              child: SizedBox(
+                  height: 50,
+                  width: 290,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blueGrey),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const ScanDeviceorNode()));
+                      },
+                      child: Text(
+                        'ADD DEVICE',
+                        style: GoogleFonts.notoSans(
+                            textStyle: const TextStyle(
+                                fontSize: 16, color: Colors.white)),
+                      ))),
             ),
           ],
         ),
       )),
     );
-  }
-}
-
-class AddDevicebtn extends StatelessWidget {
-  const AddDevicebtn({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        height: 50,
-        width: 290,
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const ScanDeviceorNode()));
-            },
-            child: Text(
-              'ADD DEVICE',
-              style: GoogleFonts.notoSans(
-                  textStyle:
-                      const TextStyle(fontSize: 16, color: Colors.white)),
-            )));
   }
 }

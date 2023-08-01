@@ -1,12 +1,17 @@
+// Replacement of device on request
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/add_device_info.dart';
-import 'package:launch_ele/api/scan_device_id.dart';
-import 'package:launch_ele/drawer.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/add_device_info.dart';
+import 'package:launch_ele/src/api/scan_device_id.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+import '../createcustomerdetails/customer_widget/customer_details.dart';
 
 class ReplaceDeviceorNode extends StatefulWidget {
   const ReplaceDeviceorNode({super.key});
@@ -34,11 +39,7 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: false, actions: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          ]),
-        ]),
+        appBar: const AppBarBoard(),
         drawer: const NavDrawer(),
         body: SafeArea(
             child: SingleChildScrollView(
@@ -48,47 +49,8 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Center(
-                            child: Card(
-                              shape: const RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color: Colors.black, width: 1)),
-                              child: SizedBox(
-                                width: 310,
-                                height: 70,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Srinivas Rao M',
-                                        style: GoogleFonts.notoSans(
-                                            textStyle: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600)),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Customer ID:',
-                                            style: GoogleFonts.notoSans(
-                                                textStyle: const TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.w500)),
-                                          ),
-                                          const Text('9034oi-tYoplsdf-234dfgr')
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                          const Center(
+                            child: CustomerDetails(),
                           ),
                           Card(
                             shape: const RoundedRectangleBorder(
@@ -126,6 +88,7 @@ class _ReplaceDeviceorNodeState extends State<ReplaceDeviceorNode> {
                             style: GoogleFonts.notoSans(
                                 textStyle: const TextStyle(fontSize: 16)),
                           ),
+                          // Scan the device for replacement
                           Center(
                             child: SizedBox(
                                 height: 250,

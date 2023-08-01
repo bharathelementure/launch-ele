@@ -1,6 +1,8 @@
+// Fetching deviceId from api to list of data in adding_nodes.dart
+
 import 'package:flutter/material.dart';
-import 'package:launch_ele/add_device_info.dart';
-import 'package:launch_ele/adding_nodes.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/add_device_info.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/adding_nodes.dart';
 
 class DiviceIdList extends StatelessWidget {
   const DiviceIdList({

@@ -1,28 +1,30 @@
+// verified for the replacement of the device to replacement and addDevice
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/drawer.dart';
-import 'package:launch_ele/replace_approved.dart';
-import 'package:launch_ele/replace_device.dart';
-import 'package:launch_ele/scan_device_node.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/add_device.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
+import 'package:launch_ele/src/screens/replace_approval_device/replace_device.dart';
+import 'package:launch_ele/src/screens/replace_approval_device/replacement_device.dart';
+import 'package:launch_ele/src/screens/Scan_device/scan_device_node.dart';
 
-class WaitForApproval extends StatefulWidget {
-  const WaitForApproval({super.key});
+import '../createcustomerdetails/customer_widget/customer_details.dart';
+
+class ReplacementApproved extends StatefulWidget {
+  const ReplacementApproved({super.key});
 
   @override
-  State<WaitForApproval> createState() => _WaitForApprovalState();
+  State<ReplacementApproved> createState() => _ReplacementApprovedState();
 }
 
-class _WaitForApprovalState extends State<WaitForApproval> {
+class _ReplacementApprovedState extends State<ReplacementApproved> {
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: false, actions: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          ]),
-        ]),
+        appBar: const AppBarBoard(),
         drawer: const NavDrawer(),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -33,43 +35,8 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 30),
-                  Center(
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.black, width: 1)),
-                      child: SizedBox(
-                        width: 310,
-                        height: 70,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Srinivas Rao M',
-                                style: GoogleFonts.notoSans(
-                                    textStyle: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600)),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Customer ID:',
-                                    style: GoogleFonts.notoSans(
-                                        textStyle: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500)),
-                                  ),
-                                  const Text('930io-Y45656-dfgh34')
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                  const Center(
+                    child: CustomerDetails(),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -121,8 +88,6 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                                   builder: (BuildContext
                                                           context) =>
                                                       const ReplaceDevice()));
-                                          // Navigator.pushNamed(
-                                          // context, '/ReplaceDevice');
                                         },
                                         child: Text(
                                           'CHANGE REQUEST',
@@ -145,7 +110,6 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                                   builder: (BuildContext
                                                           context) =>
                                                       const ScanDeviceorNode()));
-                                          // Navigator.pushNamed(context, '/ScanDeviceOrNode');
                                         },
                                         child: Text(
                                           'UPDATE',
@@ -195,15 +159,21 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
-                                    width: 180,
+                                    width: 160,
                                     height: 30,
                                     child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                const Color(0xFF788891)),
-                                        onPressed: null,
+                                            backgroundColor: Colors.blueGrey),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      const ReplaceDeviceorNode()));
+                                        },
                                         child: Text(
-                                          'CHANGE REQUEST',
+                                          'REPLACE',
                                           style: GoogleFonts.notoSans(
                                               textStyle: const TextStyle(
                                                   fontSize: 14,
@@ -223,7 +193,6 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                                   builder: (BuildContext
                                                           context) =>
                                                       const ScanDeviceorNode()));
-                                          //  Navigator.pushNamed(context, '/ScanDeviceOrNode');
                                         },
                                         child: Text(
                                           'UPDATE',
@@ -254,8 +223,7 @@ class _WaitForApprovalState extends State<WaitForApproval> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          const ReplacementApproved()));
-                              // Navigator.pushNamed(context, '/ReplacemntApproved');
+                                          const AddDevice()));
                             },
                             child: Text(
                               'ADD DEVICE',

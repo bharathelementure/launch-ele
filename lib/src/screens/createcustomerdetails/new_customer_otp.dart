@@ -1,11 +1,13 @@
+// authentication with a customer to create id and adddevice
 // ignore_for_file: unused_local_variable
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/customer_type.dart';
-import 'package:launch_ele/drawer.dart';
-import 'package:launch_ele/otp_valid.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/customer_type.dart';
+import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/customer_widget/otp_valid.dart';
 import 'package:pinput/pinput.dart';
 
 class NewCustomerOTP extends StatefulWidget {
@@ -44,11 +46,7 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
 
     var code = "";
     return Scaffold(
-      appBar: AppBar(centerTitle: false, actions: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png', scale: 2),
-        ]),
-      ]),
+      appBar: const AppBarBoard(),
       drawer: const NavDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -119,14 +117,14 @@ class _NewCustomerOTPState extends State<NewCustomerOTP> {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.blueGrey),
-                          onPressed: () async {
+                          onPressed: () {
                             try {
                               PhoneAuthCredential credential =
                                   PhoneAuthProvider.credential(
                                       verificationId: CustomerType.verify,
                                       smsCode: code);
 
-                              await FirebaseAuth.instance
+                              FirebaseAuth.instance
                                   .signInWithPhoneNumber(credential as String);
                               Navigator.push(
                                   context,

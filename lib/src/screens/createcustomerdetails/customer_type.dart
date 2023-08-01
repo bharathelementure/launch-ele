@@ -1,13 +1,16 @@
+// Creation of New customer
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/drawer.dart';
-import 'package:launch_ele/new_customer_otp.dart';
-import 'package:launch_ele/otp_valid.dart';
-import 'package:launch_ele/search_device.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/new_customer_otp.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/customer_widget/otp_valid.dart';
+import 'package:launch_ele/src/screens/search_select_atomation/search_device.dart';
 
 class CustomerType extends StatefulWidget {
   const CustomerType({super.key});
@@ -45,37 +48,7 @@ class _CustomerTypeState extends State<CustomerType> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: false, actions: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          /*Text('Launch.',
-              style: GoogleFonts.caveat(
-                textStyle:
-                    const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              )),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                width: 25,
-              ),
-              Text(
-                'by Elementure',
-                style: GoogleFonts.barlow(
-                    textStyle: const TextStyle(
-                        fontSize: 12, fontWeight: FontWeight.bold)),
-              ),
-              const Text(
-                '.',
-                style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),*/
-        ]),
-      ]),
+      appBar: const AppBarBoard(),
       drawer: const NavDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -134,8 +107,6 @@ class _CustomerTypeState extends State<CustomerType> {
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           const SearchDevice()));
-                              // Navigator.pushNamed(
-                              // context, '/SearchDevice');
                             },
                             child: const SizedBox(
                               width: 70,
@@ -248,52 +219,14 @@ class _CustomerTypeState extends State<CustomerType> {
                       onChanged: (value) {
                         setState(() {
                           selectedValue = value;
-                          print(selectedValue);
+                          // print(selectedValue);
                         });
                       },
                       onSaved: (value) {
                         selectedValue = value.toString();
-                        print(selectedValue);
+                        // print(selectedValue);
                       },
                     ),
-                    /*const SizedBox(height: 10),
-                    Center(
-                      child: Card(
-                        shape: const RoundedRectangleBorder(
-                            side: BorderSide(
-                          color: Colors.black,
-                        )),
-                        child: SizedBox(
-                          width: 350,
-                          height: 60,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
-                            child: DropdownButton(
-                              value: dropProperty,
-                              icon: const Icon(
-                                Icons.arrow_drop_down,
-                                size: 20,
-                              ),
-                              style: GoogleFonts.barlow(
-                                  textStyle: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black)),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  dropProperty = value!;
-                                });
-                              },
-                              items: property.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem(
-                                    value: value, child: Text(value));
-                              }).toList(),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),*/
                     const SizedBox(height: 10),
                     TextFormField(
                       keyboardType: TextInputType.number,
@@ -307,31 +240,6 @@ class _CustomerTypeState extends State<CustomerType> {
                                     fontSize: 16, fontWeight: FontWeight.w400)),
                           )),
                     ),
-                    /*const SizedBox(height: 10),
-                    TextFormField(
-                      controller: addressController,
-                      keyboardType: TextInputType.streetAddress,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          label: Text(
-                            'Address',
-                            style: GoogleFonts.notoSans(
-                                textStyle: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400)),
-                          )),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          label: Text(
-                            'PIN Code',
-                            style: GoogleFonts.notoSans(
-                                textStyle: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400)),
-                          )),
-                    ),*/
                     const SizedBox(height: 20),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -365,7 +273,6 @@ class _CustomerTypeState extends State<CustomerType> {
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
                                     const NewCustomerOTP()));
-                        // Navigator.pushNamed(context, '/NewCustomerOTP');
                       },
                       child: Text(
                         'NEXT',

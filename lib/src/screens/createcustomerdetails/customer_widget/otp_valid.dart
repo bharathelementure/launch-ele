@@ -1,7 +1,10 @@
+// Verified customer with otp
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/adding_nodes.dart';
-import 'package:launch_ele/drawer.dart';
+import 'package:launch_ele/src/screens/adddevice_info_nodes/adding_nodes.dart';
+// import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+// import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
 
 class OTPValid extends StatefulWidget {
   const OTPValid({super.key});
@@ -16,18 +19,10 @@ class _OTPValidState extends State<OTPValid> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: false, actions: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png', scale: 2),
-        ]),
-      ]),
-      drawer: const NavDrawer(),
       body: SafeArea(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 110),
           const Center(
             child: Icon(
               Icons.check_circle,
@@ -74,7 +69,6 @@ class _OTPValidState extends State<OTPValid> {
                               builder: (BuildContext context) => AddingNodes(
                                     scanedDevice: result.toString(),
                                   )));
-                      // Navigator.pushNamed(context, '/AddingNodes');
                     },
                     child: Text(
                       'ADD DEVICE',

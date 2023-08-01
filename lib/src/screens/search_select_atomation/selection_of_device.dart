@@ -1,7 +1,9 @@
+// Selection of automations to add for the customerDetails
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:launch_ele/customer_type.dart';
-import 'package:launch_ele/drawer.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/customer_type.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
 
 class SelectionOfDevice extends StatefulWidget {
   const SelectionOfDevice({super.key});
@@ -11,11 +13,6 @@ class SelectionOfDevice extends StatefulWidget {
 }
 
 class _SelectionOfDeviceState extends State<SelectionOfDevice> {
-  /*bool isOpen = false;
-  // custmized drop down button
-  String selectProperty = 'Select Automations';
-  String selectPropertys = 'Select Above Automations';*/
-
   String? _selectionItem1;
   String? _selectionItem2;
 
@@ -31,19 +28,8 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.brown.shade100,
-      appBar: AppBar(
-          centerTitle: false,
-          // backgroundColor: Colors.lightGreen.shade100,
-          actions: [
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Image.asset(
-                'assets/images/11111-hdpi.png',
-                scale: 2,
-              ),
-            ]),
-          ]),
-      drawer: const NavDrawer(),
+      appBar: const AppBarBoard(),
+      // drawer: const NavDrawer(),
       body: SingleChildScrollView(
         child: SafeArea(
             child: Padding(
@@ -52,79 +38,6 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 50),
-              // Customized drop down button
-              /*Center(
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        isOpen = !isOpen;
-                        setState(() {});
-                      },
-                      child: Card(
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            side: BorderSide(color: Colors.black)),
-                        child: SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  selectProperty,
-                                  style: GoogleFonts.barlow(
-                                      textStyle: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600)),
-                                ),
-                                Icon(isOpen
-                                    ? Icons.arrow_drop_up
-                                    : Icons.arrow_drop_down)
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (isOpen)
-                      ListView(
-                          primary: true,
-                          shrinkWrap: true,
-                          children: _dropdownValue.keys
-                              .map((e) => Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.shade200,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: InkWell(
-                                        onTap: () {
-                                          selectProperty = e;
-                                          _selectionItem1 = e;
-                                          _selectionItem2 = null;
-                                          isOpen = false;
-                                          setState(() {
-                                            _selectionItem1 = e;
-                                            _selectionItem2 = null;
-                                          });
-                                        },
-                                        child: Text(
-                                          e,
-                                          style: GoogleFonts.barlow(
-                                              textStyle: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600)),
-                                        ),
-                                      ),
-                                    ),
-                                  ))
-                              .toList())
-                  ],
-                ),
-              ),*/
               DropdownButtonFormField2(
                 value: _selectionItem1,
                 decoration: InputDecoration(
@@ -238,7 +151,6 @@ class _SelectionOfDeviceState extends State<SelectionOfDevice> {
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 const CustomerType()));
-                    // Navigator.pushNamed(context, '/CustomerType');
                   },
                   icon: const Icon(
                     Icons.arrow_circle_right_rounded,

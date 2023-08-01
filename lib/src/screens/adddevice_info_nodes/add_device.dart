@@ -1,9 +1,12 @@
+// Selection of automation and add the selected automation to the added customer
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:launch_ele/drawer.dart';
-import 'package:launch_ele/scan_device_node.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/appbar.dart/drawer.dart';
+import 'package:launch_ele/src/screens/Scan_device/scan_device_node.dart';
+import 'package:launch_ele/src/screens/createcustomerdetails/customer_widget/customer_details.dart';
 
 class AddDevice extends StatefulWidget {
   const AddDevice({super.key});
@@ -17,6 +20,7 @@ class _AddDeviceState extends State<AddDevice> {
   String? _selectionItem1;
   String? _selectionItem2;
 
+// DropDown List value
   final Map<String, List<String>> _dropdownValue = {
     'Water Management': [
       'Aquesa Measure',
@@ -29,11 +33,7 @@ class _AddDeviceState extends State<AddDevice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: false, actions: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Image.asset('assets/images/11111-hdpi.png', scale: 2),
-          ]),
-        ]),
+        appBar: const AppBarBoard(),
         drawer: const NavDrawer(),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -44,8 +44,9 @@ class _AddDeviceState extends State<AddDevice> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 30),
-                  Center(
-                    child: Card(
+                  const Center(
+                    child: CustomerDetails(),
+                    /*Card(
                       shape: const RoundedRectangleBorder(
                           side: BorderSide(color: Colors.black, width: 1)),
                       child: SizedBox(
@@ -82,9 +83,10 @@ class _AddDeviceState extends State<AddDevice> {
                           ),
                         ),
                       ),
-                    ),
+                    ),*/
                   ),
                   const SizedBox(height: 30),
+                  // DropDown list with main
                   DropdownButtonFormField2(
                     value: _selectionItem1,
                     decoration: InputDecoration(
@@ -135,6 +137,7 @@ class _AddDeviceState extends State<AddDevice> {
                     },
                   ),
                   const SizedBox(height: 30),
+                  // DropDown list with submain
                   DropdownButtonFormField2(
                     value: _selectionItem2,
                     decoration: InputDecoration(
@@ -185,76 +188,8 @@ class _AddDeviceState extends State<AddDevice> {
                       _selectionItem2 = value.toString();
                     },
                   ),
-                  /*Center(
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.black, width: 2)),
-                      child: SizedBox(
-                        width: 256,
-                        height: 50,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: DropdownButton<String>(
-                            hint: const Text('Select Automations'),
-                            elevation: 10,
-                            borderRadius: BorderRadius.circular(15),
-                            value: _selectionItem1,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectionItem1 = value;
-                                _selectionItem2 = null;
-                              });
-                            },
-                            items: _dropdownValue.keys
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  Center(
-                    child: Card(
-                      shape: const RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.black, width: 2)),
-                      child: SizedBox(
-                        width: 256,
-                        height: 50,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8, right: 8),
-                          child: DropdownButton<String>(
-                            hint: Text(
-                              'Select above automations',
-                              style: GoogleFonts.barlow(textStyle: const TextStyle()),
-                            ),
-                            borderRadius: BorderRadius.circular(15),
-                            value: _selectionItem2,
-                            onChanged: (value) {
-                              setState(() {
-                                _selectionItem2 = value!;
-                              });
-                            },
-                            items: _selectionItem1 == null
-                                ? null
-                                : _dropdownValue[_selectionItem1]!
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
-                                    );
-                                  }).toList(),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),*/
                   const SizedBox(height: 50),
+                  // IconButton to ScanDeviceId
                   Center(
                     child: IconButton(
                         onPressed: () {
@@ -263,7 +198,6 @@ class _AddDeviceState extends State<AddDevice> {
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
                                       const ScanDeviceorNode()));
-                          // Navigator.pushNamed(context, '/ScanDeviceOrNode');
                         },
                         icon: const Icon(
                           Icons.arrow_circle_right_rounded,

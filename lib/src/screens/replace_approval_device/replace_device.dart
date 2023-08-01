@@ -1,10 +1,12 @@
+// Choosing of issues in a device for replacement
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:launch_ele/drawer.dart';
-import 'package:launch_ele/wait_forapproval.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
+import 'package:launch_ele/src/screens/replace_approval_device/wait_forapproval.dart';
 
 enum SingingCharacter {
   physicalDamage,
@@ -27,12 +29,8 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: false, actions: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png', scale: 2),
-        ]),
-      ]),
-      drawer: const NavDrawer(),
+      appBar: const AppBarBoard(),
+      // drawer: const NavDrawer(),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
@@ -84,7 +82,8 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                       });
                     }),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
+              // Snap of Damaged device
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +113,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +138,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Center(
                 child: SizedBox(
                     height: 50,
@@ -175,8 +174,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                               context,
                               MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      const WaitForApproval()));
-                          // Navigator.pushNamed(context, '/WaitForApproval');
+                                      WaitForApproval()));
                         },
                         child: Text(
                           'REQUESTE TO REPLACE',
@@ -192,6 +190,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
     );
   }
 
+// Sizeing the image width and height from selectImageFromCamera
   Future selectImage() {
     return showDialog(
         context: context,
@@ -209,32 +208,6 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        /*GestureDetector(
-                          onTap: () async {
-                            selectedImagePath = await selectImageFromGallery();
-                            print('Image_path:-');
-                            if (selectedImagePath != '') {
-                              Navigator.pop(context);
-                              setState(() {});
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('No Image Selected !')));
-                            }
-                          },
-                          child: Card(
-                            elevation: 5,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                children: const [
-                                  Icon(Icons.linked_camera_rounded, size: 50),
-                                  Text('Gallery')
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),*/
                         GestureDetector(
                           onTap: () async {
                             selectedImagePath = await selectImageFromCamera();
@@ -274,16 +247,7 @@ class _ReplaceDeviceState extends State<ReplaceDevice> {
         });
   }
 
-  selectImageFromGallery() async {
-    XFile? file = await ImagePicker()
-        .pickImage(source: ImageSource.gallery, imageQuality: 10);
-    if (file != null) {
-      return file.path;
-    } else {
-      return '';
-    }
-  }
-
+// package used ImagePicker
   selectImageFromCamera() async {
     XFile? file = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 10);

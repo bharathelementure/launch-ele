@@ -1,3 +1,5 @@
+// Take the snap of the installed device
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -7,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:launch_ele/device_with_info.dart';
+import 'package:launch_ele/src/screens/device_info/device_with_info.dart';
 import 'package:http/http.dart' as http;
-import 'package:launch_ele/drawer.dart';
+import 'package:launch_ele/src/screens/appbar.dart/app_bar_board.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class AddDeviceInfo extends StatefulWidget {
@@ -30,7 +32,6 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
       "customer_id": user.uid,
       "device_id": widget.snapDeviceId,
       "picture": img64,
-      // "selected_shaft": selectedValue
     };
     print(rdata);
     final jsonString = json.encode(rdata);
@@ -71,12 +72,8 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: false, actions: [
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Image.asset('assets/images/11111-hdpi.png', scale: 2),
-        ]),
-      ]),
-      drawer: const NavDrawer(),
+      appBar: const AppBarBoard(),
+      // drawer: const NavDrawer(),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
@@ -122,6 +119,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                 ],
               ),
               const SizedBox(height: 10),
+              // Selecting of snap from camera
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -177,6 +175,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                 ),
               ),
               const SizedBox(height: 10),
+              // Selection of Shafts to the instaled device
               DropdownButtonFormField2(
                 decoration: InputDecoration(
                   isDense: true,
@@ -226,42 +225,8 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                   selectedValue = value.toString();
                 },
               ),
-              /*Center(
-                child: Card(
-                  shape: const RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black, width: 2)),
-                  child: SizedBox(
-                    width: 216,
-                    height: 50,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: DropdownButton(
-                        value: dropShaft,
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          size: 20,
-                        ),
-                        style: GoogleFonts.barlow(
-                            textStyle: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black)),
-                        onChanged: (String? value) {
-                          setState(() {
-                            dropShaft = value!;
-                          });
-                        },
-                        items: homeShaft
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem(
-                              value: value, child: Text(value));
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ),
-              ),*/
               const SizedBox(height: 10),
+              // ElevatedButton
               Center(
                 child: SizedBox(
                     height: 50,
@@ -280,7 +245,6 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           const DeviceWithInfo()));
-                          // Navigator.pushNamed(context, '/DeviceWithInfo');
                         },
                         child: Text(
                           'ADD DEVICE',
@@ -296,6 +260,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
     );
   }
 
+// Sizeing the image width and height from selectImageFromCamera
   Future selectImage() {
     return showDialog(
         context: context,
@@ -316,8 +281,6 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
                         GestureDetector(
                           onTap: () async {
                             selectedImagePath = await selectImageFromCamera();
-                            // print(
-                            //     'Image_path:- ${selectedImagePath.characters}');
                             if (selectedImagePath != '') {
                               Navigator.pop(context);
                               setState(() {});
@@ -353,6 +316,7 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
         });
   }
 
+// package used ImagePicker
   selectImageFromCamera() async {
     XFile? file = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 100);
