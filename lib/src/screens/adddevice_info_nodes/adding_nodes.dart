@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:launch_ele/src/screens/adddevice_info_nodes/add_device_info.dart';
 import 'package:launch_ele/src/screens/adddevice_info_nodes/adddevice_widgets/device_id_list.dart';
@@ -24,7 +26,7 @@ class _AddingNodesState extends State<AddingNodes> {
 
   List devidList = [];
 
-  Future getDeviceList() async {
+  /*Future getDeviceList() async {
     final rdata = {"customer_id": user.uid};
     final jsonString = json.encode(rdata);
     final uir = Uri.parse("http://192.168.0.126:8090/customer_details/");
@@ -34,11 +36,6 @@ class _AddingNodesState extends State<AddingNodes> {
     if (response.statusCode == 200) {
       final deviidjso = json.decode(response.body);
       final rest = deviidjso["DeviceIDs"];
-      // for (var i = 0; i < rest.length; i++) {
-      //   print(rest[i]);
-      // }
-      // print("as List $rest");
-      // scanedDivice = rest;
       setState(() {
         devidList = rest;
       });
@@ -47,6 +44,43 @@ class _AddingNodesState extends State<AddingNodes> {
       return devidList;
     } else {
       return const CircularProgressIndicator();
+    }
+  }*/
+
+  // Localy host api
+  Future getDeviceList() async {
+    try {
+      final rdata = {"customer_id": user.uid};
+      final jsonString = json.encode(rdata);
+      final uri = Uri.parse("http://192.168.0.126:8090/customer_details/");
+
+      http.Response response;
+      response = await http.post(uri, body: jsonString);
+
+      if (response.statusCode == 200) {
+        final deviidjso = json.decode(response.body);
+        final rest = deviidjso["DeviceIDs"];
+        setState(() {
+          devidList = rest;
+        });
+        print(devidList);
+        print("API request successful");
+        return devidList;
+      } else {
+        Fluttertoast.showToast(
+            msg: "API request failed with status code: ${response.statusCode}");
+        print("API request failed with status code: ${response.statusCode}");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "API request failed with status code: $e");
+      print("An error occurred: $e");
+      if (e is SocketException) {
+        Fluttertoast.showToast(msg: "No internet connection");
+        print("No internet connection");
+        // Handle no internet connection here
+      } else {
+        const CircularProgressIndicator();
+      }
     }
   }
 

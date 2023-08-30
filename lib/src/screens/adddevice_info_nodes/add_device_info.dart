@@ -25,7 +25,7 @@ class AddDeviceInfo extends StatefulWidget {
 String? snapDeviceId;
 
 class _AddDeviceInfoState extends State<AddDeviceInfo> {
-  Future snapDevice() async {
+  /*Future snapDevice() async {
     var bytes = File(selectedImagePath).readAsBytesSync();
     String img64 = base64.encode(bytes);
     final rdata = {
@@ -46,6 +46,47 @@ class _AddDeviceInfoState extends State<AddDeviceInfo> {
       return response.toString();
     } else {
       return const CircularProgressIndicator();
+    }
+  }*/
+
+  // Localy host api
+  Future snapDevice() async {
+    var bytes = File(selectedImagePath).readAsBytesSync();
+    String img64 = base64.encode(bytes);
+    try {
+      final rdata = {
+        "customer_id": user.uid,
+        "device_id": widget.snapDeviceId,
+        "picture": img64,
+      };
+      final jsonString = json.encode(rdata);
+      final uri = Uri.parse("http://192.168.0.126:8090/upload/");
+
+      http.Response response;
+      response = await http.post(uri, body: jsonString);
+
+      if (response.statusCode == 200) {
+        setState(() {
+          snapDeviceId = response.body;
+        });
+        print(snapDeviceId);
+        print("API request successful");
+        return response.toString();
+      } else {
+        Fluttertoast.showToast(
+            msg: "API request failed with status code: ${response.statusCode}");
+        print("API request failed with status code: ${response.statusCode}");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: "API request failed with status code: $e");
+      print("An error occurred: $e");
+      if (e is SocketException) {
+        Fluttertoast.showToast(msg: "No internet connection");
+        print("No internet connection");
+        // Handle no internet connection here
+      } else {
+        const CircularProgressIndicator();
+      }
     }
   }
 
